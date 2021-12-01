@@ -1,0 +1,9 @@
+.header {
+  grid-area: head;
+  background: url(../../img/neon-grid.jpg);
+  background-position: -280px -410px;
+}
+
+.img {
+  width: 40px;
+}

@@ -1,0 +1,78 @@
+/* 
+*{
+  font-size: 20px;
+  box-sizing: border-box;
+  padding-left: 5px;
+  margin-left: 5px;
+}
+#root{
+  margin-bottom: 1em;
+}
+.black{
+  background-color: black;
+}
+.white{
+  background-color: white;
+}
+.container{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-left: 1em;
+  padding-top: 0.5em;
+}
+.newNote {
+  display: flex;
+  flex-direction: row;
+}
+p{
+  display: flex;
+  position: relative;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 0.3em;
+}
+input{
+  width: 20em;
+}
+button{
+  display: block;
+  margin-left: 1em;
+  text-align: center;
+  width: max-content;
+}
+.buttons{
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 20em;
+}
+li{
+  position: relative;
+  padding-bottom: 1em;
+}
+li button{
+  margin-left: 3em;
+  cursor: pointer;
+  width: max-content;
+}
+table{
+  border-collapse: collapse;
+  width: fit-content;
+  border: 1px solid black;
+}
+th {
+  border: 1px solid #333;
+  padding: 5px;
+}
+td{
+  border: 1px solid #333;
+  text-align: center;
+  padding: 5px;
+}
+.inputs{
+  display: flex;
+  flex-direction: row;
+  margin-left: 0;
+  margin-bottom: 1em;
+} */
