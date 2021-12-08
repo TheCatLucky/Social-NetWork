@@ -21,14 +21,14 @@ const App = (props) => {
               <Dialogs
                 messagesData={props.appState.dialogsPage.messagesData}
                 dialogsData={props.appState.dialogsPage.dialogsData}
+                newMessageText={props.appState.dialogsPage.newMessageText}
+                dispatch={props.dispatch}
               />} />
             <Route path="/profile" element={
               <Profile
                 postsData={props.appState.profilePage.postsData}
-                addPost={props.addPost}
-                removePost={props.removepost}
-                updateNewPostText={props.updateNewPostText}
                 newPostText={props.appState.profilePage.newPostText}
+                dispatch={props.dispatch}
               />} />
           </Routes>
         </div>

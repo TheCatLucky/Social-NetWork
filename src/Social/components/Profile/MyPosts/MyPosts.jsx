@@ -2,7 +2,7 @@ import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
 import { nanoid } from 'nanoid';
-import { removePost } from '../../../redux/state';
+
 
 function genId() { //кастомная генерация id
   let modelId = nanoid();
@@ -22,11 +22,17 @@ const MyPosts = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-    props.addPost();
+    props.dispatch({ type: "ADD-POST" });
   }
-  let updateNewPostText = () => {
+  let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.updateNewPostText(text);
+    props.dispatch({
+      type: "UPDATE-NEW-POST-TEXT",
+      newText: text,
+    });
+  }
+  let removePost = () => {
+    props.dispatch({ type: "REMOVE-POST" });
   }
 
   return (
@@ -37,7 +43,7 @@ const MyPosts = (props) => {
           <textarea
             ref={newPostElement}
             value={props.newPostText}
-            onChange={updateNewPostText}
+            onChange={onPostChange}
           />
         </div>
         <div>

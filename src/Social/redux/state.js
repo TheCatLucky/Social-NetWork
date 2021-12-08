@@ -1,48 +1,79 @@
-import { rerenderEntireTree } from '../../render';
-const state = {
-  profilePage: {
-    postsData: [
-      { id: 1, message: "Hello", name: "Kira", age: "13" },
-      { id: 2, message: "How are you?", name: "Line", age: 52 },
-      { id: 3, message: "Are you fine?", name: "Lina", age: 12 },
-      { id: 4, message: "How old are you?", name: "Kostya", age: 53 },
-      { id: 5, message: "Glad to see you", name: "Dasha", age: 36 },
-    ],
-    newPostText: ''
+import { nanoid } from 'nanoid';
+let store = {
+  _state: {
+    profilePage: {
+      postsData: [
+        { id: 1, message: "Hello", name: "Kira", age: "13" },
+        { id: 2, message: "How are you?", name: "Line", age: 52 },
+        { id: 3, message: "Are you fine?", name: "Lina", age: 12 },
+        { id: 4, message: "How old are you?", name: "Kostya", age: 53 },
+        { id: 5, message: "Glad to see you", name: "Dasha", age: 36 },
+      ],
+      newPostText: ""
+    },
+    dialogsPage: {
+      dialogsData: [
+        { id: 1, name: "Петя" },
+        { id: 2, name: "Маша" },
+        { id: 3, name: "Катя" },
+        { id: 4, name: "Ваня" },
+        { id: 5, name: "Кира" },
+      ],
+      messagesData: [
+        { id: 1, message: "Ку!" },
+        { id: 2, message: "Как дела?" },
+        { id: 3, message: "Все гуд" },
+      ],
+      newMessageText: ""
+    }
   },
-  dialogsPage: {
-    dialogsData: [
-      { id: 1, name: "Петя" },
-      { id: 2, name: "Маша" },
-      { id: 3, name: "Катя" },
-      { id: 4, name: "Ваня" },
-      { id: 5, name: "Кира" },
-    ],
-    messagesData: [
-      { id: 1, message: "Ку!" },
-      { id: 2, message: "Как дела?" },
-      { id: 3, message: "Все гуд" },
-    ],
+  _genId() { //кастомная генерация id
+    let modelId = nanoid();
+    return modelId;
+  },
+  _callSubscriber() {
+    console.log('State was changed');
+  },
+  getState() {
+    return this._state;
+  },
+  subscribe(observer) {
+    this._callSubscriber = observer;
+  },
+  dispatch(action) {
+    if (action.type === 'ADD-POST') {
+      let newPost = {
+        id: this._genId(),
+        message: this._state.profilePage.newPostText,
+        name: "Masha",
+        age: 20
+      }
+      this._state.profilePage.postsData.push(newPost);
+      this._callSubscriber(this._state);
+      this._state.profilePage.newPostText = "";
+    }
+    else if (action.type === "UPDATE-NEW-POST-TEXT") {
+      this._state.profilePage.newPostText = action.newText;
+      this._callSubscriber(this._state); 
+    }
+    else if (action.type === "REMOVE-POST") {
+      this._state.profilePage.postsData.pop();
+      this._callSubscriber(this._state);
+    }
+    else if (action.type === "ADD-MESSAGE") {
+      let message = {
+        id: this._genId(),
+        message: this._state.dialogsPage.newMessageText
+      }
+      this._state.dialogsPage.messagesData.push(message);
+      this._callSubscriber(this._state);
+      this._state.dialogsPage.newMessageText = "";
+    }
+    else if (action.type === "UPDATE-NEW-MEESSAGE-TEXT") {
+      this._state.dialogsPage.newMessageText = action.newText;
+      this._callSubscriber(this._state);
+    }
   }
-}
-export let addPost = () => {
-  let newPost = {
-    id: 5,
-    message: state.profilePage.newPostText,
-    name: "Masha",
-    age: 20
-  }
-  state.profilePage.postsData.push(newPost);
-  rerenderEntireTree(state);
-  state.profilePage.newPostText = "";
-}
-export let updateNewPostText = (newText) => {
-  state.profilePage.newPostText = newText;
-  rerenderEntireTree(state);
 }
 
-export let removePost = () => {
-  state.profilePage.postsData.pop();
-  rerenderEntireTree(state);
-}
-export default state;
+export default store;
