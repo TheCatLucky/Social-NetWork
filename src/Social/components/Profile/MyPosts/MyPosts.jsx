@@ -2,12 +2,14 @@ import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
 import { nanoid } from 'nanoid';
+import { addPostActionCreator, onPostChangeActionCreator, removePostActionCreator } from './../../../redux/state';
 
 
 function genId() { //кастомная генерация id
   let modelId = nanoid();
   return modelId;
 }
+
 
 const MyPosts = (props) => {
   let postsResult = props.postsData.map((post) => {
@@ -19,20 +21,17 @@ const MyPosts = (props) => {
       />)
   });
 
-  let newPostElement = React.createRef();
 
+  let newPostElement = React.createRef();
   let addPost = () => {
-    props.dispatch({ type: "ADD-POST" });
+    props.dispatch(addPostActionCreator());
   }
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    props.dispatch({
-      type: "UPDATE-NEW-POST-TEXT",
-      newText: text,
-    });
+    props.dispatch(onPostChangeActionCreator(text));
   }
   let removePost = () => {
-    props.dispatch({ type: "REMOVE-POST" });
+    props.dispatch(removePostActionCreator());
   }
 
   return (

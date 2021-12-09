@@ -1,4 +1,9 @@
 import { nanoid } from 'nanoid';
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const UPDATE_NEW_MEESSAGE_TEXT = "UPDATE-NEW-MEESSAGE-TEXT";
+const REMOVE_POST = "REMOVE-POST";
+const ADD_MESSAGE = "ADD-MESSAGE";
 let store = {
   _state: {
     profilePage: {
@@ -41,7 +46,7 @@ let store = {
     this._callSubscriber = observer;
   },
   dispatch(action) {
-    if (action.type === 'ADD-POST') {
+    if (action.type === ADD_POST) {
       let newPost = {
         id: this._genId(),
         message: this._state.profilePage.newPostText,
@@ -52,15 +57,15 @@ let store = {
       this._callSubscriber(this._state);
       this._state.profilePage.newPostText = "";
     }
-    else if (action.type === "UPDATE-NEW-POST-TEXT") {
+    else if (action.type === UPDATE_NEW_POST_TEXT) {
       this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state); 
+      this._callSubscriber(this._state);
     }
-    else if (action.type === "REMOVE-POST") {
+    else if (action.type === REMOVE_POST) {
       this._state.profilePage.postsData.pop();
       this._callSubscriber(this._state);
     }
-    else if (action.type === "ADD-MESSAGE") {
+    else if (action.type === ADD_MESSAGE) {
       let message = {
         id: this._genId(),
         message: this._state.dialogsPage.newMessageText
@@ -69,11 +74,18 @@ let store = {
       this._callSubscriber(this._state);
       this._state.dialogsPage.newMessageText = "";
     }
-    else if (action.type === "UPDATE-NEW-MEESSAGE-TEXT") {
+    else if (action.type === UPDATE_NEW_MEESSAGE_TEXT) {
       this._state.dialogsPage.newMessageText = action.newText;
       this._callSubscriber(this._state);
     }
   }
 }
-
+export const addPostActionCreator = () => ({ type: ADD_POST });
+export const onPostChangeActionCreator = (text) => (
+  {
+    type: UPDATE_NEW_POST_TEXT,
+    newText: text,
+  }
+)
+export const removePostActionCreator = () => ({ type: REMOVE_POST })
 export default store;
