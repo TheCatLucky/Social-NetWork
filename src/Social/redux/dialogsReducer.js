@@ -5,7 +5,23 @@ const genId = () => { //кастомная генерация id
   let id = nanoid();
   return id;
 }
-const diallogsReducer = (state, action) => {
+
+let initialState = {
+  dialogsData: [
+    { id: 1, name: "Петя" },
+    { id: 2, name: "Маша" },
+    { id: 3, name: "Катя" },
+    { id: 4, name: "Ваня" },
+    { id: 5, name: "Кира" },
+  ],
+  messagesData: [
+    { id: 1, message: "Ку!" },
+    { id: 2, message: "Как дела?" },
+    { id: 3, message: "Все гуд" },
+  ],
+  newMessageText: ""
+}
+const diallogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_MESSAGE:
       let message = {

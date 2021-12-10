@@ -6,7 +6,18 @@ const genId = () => { //кастомная генерация id
   let id = nanoid();
   return id;
 }
-const profileReducer = (state, action) => {
+
+let initialState = {
+  postsData: [
+    { id: 1, message: "Hello", name: "Kira", age: "13" },
+    { id: 2, message: "How are you?", name: "Line", age: 52 },
+    { id: 3, message: "Are you fine?", name: "Lina", age: 12 },
+    { id: 4, message: "How old are you?", name: "Kostya", age: 53 },
+    { id: 5, message: "Glad to see you", name: "Dasha", age: 36 },
+  ],
+  newPostText: ""
+};
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       let newPost = {
