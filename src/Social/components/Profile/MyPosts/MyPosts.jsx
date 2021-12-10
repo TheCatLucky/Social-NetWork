@@ -2,7 +2,7 @@ import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
 import { nanoid } from 'nanoid';
-import { addPostActionCreator, onPostChangeActionCreator, removePostActionCreator } from './../../../redux/state';
+import { addPostActionCreator, onPostChangeActionCreator, removePostActionCreator } from '../../../redux/profileReducer';
 
 
 function genId() { //кастомная генерация id
@@ -21,13 +21,11 @@ const MyPosts = (props) => {
       />)
   });
 
-
-  let newPostElement = React.createRef();
   let addPost = () => {
     props.dispatch(addPostActionCreator());
   }
-  let onPostChange = () => {
-    let text = newPostElement.current.value;
+  let onPostChange = (e) => {
+    let text = e.target.value;
     props.dispatch(onPostChangeActionCreator(text));
   }
   let removePost = () => {
@@ -40,7 +38,9 @@ const MyPosts = (props) => {
       <div>
         <div>
           <textarea
-            ref={newPostElement}
+            cols={40}
+            rows={4}
+            placeholder='Начните печатать свой пост'
             value={props.newPostText}
             onChange={onPostChange}
           />

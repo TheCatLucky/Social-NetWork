@@ -12,9 +12,16 @@ padding-top: 10px;
   text-decoration: none;
   color: white;
 }
+a.active{
+  color:gold;
+}
 .messages{
   padding: 10px 0px 0px 10px;
 }
 .messages__item{
   padding-top: 10px;
+}
+textarea{
+  padding-left: 5px;
+  resize:none;
 }
