@@ -1,0 +1,28 @@
+img {
+  width: 200px;
+}
+div {
+  display: flex;
+  flex-direction: column;
+}
+button {
+  margin-top: 5px;
+  width: 100px;
+}
+.user {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+.user_info{
+  display: flex;
+  flex-direction: row;
+}
+.name {
+  display: flex;
+  flex-direction: column;
+}
+.location {
+  display: flex;
+  flex-direction: column;
+}

@@ -5,20 +5,9 @@ import ReactDOM from 'react-dom';
 import App from './Social/App';
 import { Provider } from 'react-redux';
 
-
-let rerenderEntireTree = (state) => {
-
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
-  )
-}
-
-rerenderEntireTree(store.getState());
-
-store.subscribe(() => {
-  let state = store.getState();
-  rerenderEntireTree(state);
-}); 
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root')
+)

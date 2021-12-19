@@ -8,9 +8,10 @@ const Navbar = (props) => {
       <ul>
         <li className={style.item}><NavLink to="/profile" className={({ isActive }) => isActive ? `${style.active}` : ""}>Profile</NavLink></li>
         <li className={style.item}><NavLink to="/dialogs" className={({ isActive }) => isActive ? `${style.active}` : ""}>Messages</NavLink></li>
-        <li className={style.item}><NavLink to="/news" >News</NavLink></li>
-        <li className={style.item}><NavLink to="/music">Music</NavLink></li>
-        <li className={style.item}><NavLink to="/settings">Settings</NavLink></li>
+        <li className={style.item}><NavLink to="/users" className={({ isActive }) => isActive ? `${style.active}` : ""}>Users</NavLink></li>
+        <li className={style.item}><NavLink to="/news" className={({ isActive }) => isActive ? `${style.active}` : ""}>News</NavLink></li>
+        <li className={style.item}><NavLink to="/music" className={({ isActive }) => isActive ? `${style.active}` : ""}>Music</NavLink></li>
+        <li className={style.item}><NavLink to="/settings" className={({ isActive }) => isActive ? `${style.active}` : ""}>Settings</NavLink></li>
       </ul>
     </nav>
   );

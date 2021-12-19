@@ -9,11 +9,11 @@ const genId = () => { //кастомная генерация id
 
 let initialState = {
   postsData: [
-    { id: 1, message: "Hello", name: "Kira", age: "13" },
-    { id: 2, message: "How are you?", name: "Line", age: 52 },
-    { id: 3, message: "Are you fine?", name: "Lina", age: 12 },
-    { id: 4, message: "How old are you?", name: "Kostya", age: 53 },
-    { id: 5, message: "Glad to see you", name: "Dasha", age: 36 },
+    { id: genId(), message: "Hello", name: "Kira", age: "13" },
+    { id: genId(), message: "How are you?", name: "Line", age: 52 },
+    { id: genId(), message: "Are you fine?", name: "Lina", age: 12 },
+    { id: genId(), message: "How old are you?", name: "Kostya", age: 53 },
+    { id: genId(), message: "Glad to see you", name: "Dasha", age: 36 },
   ],
   newPostText: ""
 };
@@ -26,15 +26,21 @@ const profileReducer = (state = initialState, action) => {
         name: "Masha",
         age: 20
       }
-      state.postsData.push(newPost);
-      state.newPostText = "";
-      return state;
+      return {
+        ...state,
+        postsData: [...state.postsData, newPost],
+        newPostText: ""
+      }
     case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText;
-      return state;
+      return {
+        ...state,
+        newPostText: action.newText
+      }
     case REMOVE_POST:
-      state.postsData.pop();
-      return state;
+      return {
+        ...state,
+        postsData: [...state.postsData].slice(0, state.postsData.length - 1)
+      }
     default:
       return state;
   }

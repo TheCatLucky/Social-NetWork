@@ -5,22 +5,22 @@ const genId = () => { //кастомная генерация id
   let id = nanoid();
   return id;
 }
-
 let initialState = {
   dialogsData: [
-    { id: 1, name: "Петя" },
-    { id: 2, name: "Маша" },
-    { id: 3, name: "Катя" },
-    { id: 4, name: "Ваня" },
-    { id: 5, name: "Кира" },
+    { id: genId(), name: "Петя" },
+    { id: genId(), name: "Маша" },
+    { id: genId(), name: "Катя" },
+    { id: genId(), name: "Ваня" },
+    { id: genId(), name: "Кира" },
   ],
   messagesData: [
-    { id: 1, message: "Ку!" },
-    { id: 2, message: "Как дела?" },
-    { id: 3, message: "Все гуд" },
+    { id: genId(), message: "Ку!" },
+    { id: genId(), message: "Как дела?" },
+    { id: genId(), message: "Все гуд" },
   ],
   newMessageText: ""
 }
+
 const diallogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_MESSAGE:
@@ -28,16 +28,21 @@ const diallogsReducer = (state = initialState, action) => {
         id: genId(),
         message: state.newMessageText,
       }
-      state.messagesData.push(message);
-      state.newMessageText = "";
-      return state;
+      return {
+        ...state,
+        newMessageText: "",
+        messagesData: [...state.messagesData, message]
+      }
     case UPDATE_NEW_MEESSAGE_TEXT:
-      state.newMessageText = action.message;
-      return state;
+      return {
+        ...state,
+        newMessageText: action.message
+      }
     default:
       return state;
   }
 }
+
 export const sendMessageActionCreatior = () => ({ type: SEND_MESSAGE })
 export const onMessageTextActionCreator = (text) => (
   {
