@@ -1,10 +1,10 @@
-import Users from "./Users";
+import Users from "./Users.jsx";
+
 import { connect } from 'react-redux';
-import { followAC, setUsersAC, unfollowAC} from "./../../redux/usersReducer"
+import { followAC, setUsersAC, unfollowAC } from "./../../redux/usersReducer"
 
 
 let mapStateToProps = (state) => {
-
   return {
     users: state.usersPage.usersData
   }

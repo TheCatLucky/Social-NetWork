@@ -35,6 +35,7 @@ const MyPosts = (props) => {
       <div>
         <div>
           <textarea
+            className={style.posts}
             cols={40}
             rows={4}
             placeholder='Начните печатать свой пост'

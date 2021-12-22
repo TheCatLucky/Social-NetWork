@@ -8,7 +8,7 @@ const genId = () => { //кастомная генерация id
 }
 let initialState = {
   usersData: [
-    {
+    /* {
       id: genId(),
       followed: true,
       photoUrl : 'https://storage.googleapis.com/yk-cdn/photos/plp/mina-mimbu/rainbow.jpg',
@@ -37,7 +37,7 @@ let initialState = {
       name: "Катя",
       status: "Снова дождь :cc",
       location: {
-        city: "Санкт-Питербург",
+        city: "Санкт-Петербург",
         country: "Россия"
       }
     },
@@ -62,7 +62,7 @@ let initialState = {
         city: "город Латвии",
         country: "Латвия"
       }
-    },
+    }, */
   ],
 }
 const usersReducer = (state = initialState, action) => {

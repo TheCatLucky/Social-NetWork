@@ -7,7 +7,7 @@ ul {
 }
 .item a{
   color:black;
-  padding-left: 10px;
+  padding-left: 5px;
   text-decoration: none;
 }
 a.active{

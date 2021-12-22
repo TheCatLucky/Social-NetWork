@@ -38,6 +38,7 @@ const Dialogs = (props) => {
         {messagesResult}
         <div>
           <textarea
+            className={style.message__zone}
             cols={30}
             rows={3}
             placeholder='Введите сообщение'

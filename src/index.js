@@ -1,7 +1,6 @@
 import store from './Social/redux/reduxStore';
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import App from './Social/App';
 import { Provider } from 'react-redux';
 
