@@ -33,3 +33,14 @@ button {
 .name_name {
   margin-top: 10px;
 }
+.selected{
+  font-weight: bold;
+}
+.pagesNumber{
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+}
+.pageNumber{
+  margin-left: 10px;
+}

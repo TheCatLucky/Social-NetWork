@@ -2,6 +2,8 @@ import { nanoid } from 'nanoid';
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
+const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 const genId = () => { //кастомная генерация id
   let id = nanoid();
   return id;
@@ -64,6 +66,9 @@ let initialState = {
       }
     }, */
   ],
+  pageSize: 5,
+  totalUsersCount: 0,
+  currentPage : 1,
 }
 const usersReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -90,7 +95,19 @@ const usersReducer = (state = initialState, action) => {
     case SET_USERS: {
       return {
         ...state,
-        usersData: [...state.usersData, ...action.usersData]
+        usersData: [...action.usersData]
+      }
+    }
+    case SET_CURRENT_PAGE: {
+      return {
+        ...state,
+        currentPage : action.currentPage
+      }
+    }
+    case SET_TOTAL_USERS_COUNT: {
+      return {
+        ...state,
+        totalUsersCount: action.totalUsersCount / 100
       }
     }
     default:
@@ -114,6 +131,18 @@ export const setUsersAC = (usersData) => (
   {
     type: SET_USERS,
     usersData
+  }
+)
+export const setCurrentPageAC = (currentPage) => (
+  {
+    type: SET_CURRENT_PAGE,
+    currentPage
+  }
+)
+export const setTotalUsersCountAC = (totalUsersCount) => (
+  {
+    type: SET_TOTAL_USERS_COUNT,
+    totalUsersCount
   }
 )
 
