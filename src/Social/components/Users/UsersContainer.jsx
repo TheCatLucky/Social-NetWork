@@ -6,13 +6,12 @@ import { follow, setUsers, unfollow, setCurrentPage, setTotalUsersCount, toggleI
 import Preloader from '../Common/Preloader/Preloader';
 
 class UsersContainer extends React.Component {
-
   componentDidMount() {
     this.props.toggleIsFetching(true);
     /* if (this.props.users.length === 0) { // для остановки запросов на сервер. для работы изменить на 0
       axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
         .then(response => {
-          console.log(response)
+          console.log(response.status)
           this.props.toggleIsFetching(false);
           this.props.setUsers(response.data.items);
           this.props.setTotalUsersCount(response.data.totalCount);
