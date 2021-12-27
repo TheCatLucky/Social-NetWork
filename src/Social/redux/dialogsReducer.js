@@ -24,6 +24,9 @@ let initialState = {
 const diallogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_MESSAGE:
+      if (state.newMessageText === "") {
+        return state;
+      }
       let message = {
         id: genId(),
         message: state.newMessageText,
@@ -43,8 +46,8 @@ const diallogsReducer = (state = initialState, action) => {
   }
 }
 
-export const sendMessageActionCreatior = () => ({ type: SEND_MESSAGE })
-export const onMessageTextActionCreator = (text) => (
+export const sendMessage = () => ({ type: SEND_MESSAGE })
+export const updateNewMessageText = (text) => (
   {
     type: UPDATE_NEW_MEESSAGE_TEXT,
     message: text

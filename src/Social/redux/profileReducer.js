@@ -20,6 +20,9 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
+      if (state.newPostText === "") {
+        return state;
+      }
       let newPost = {
         id: genId(),
         message: state.newPostText,
@@ -45,14 +48,14 @@ const profileReducer = (state = initialState, action) => {
       return state;
   }
 }
-export const addPostActionCreator = () => ({ type: ADD_POST });
-export const onPostChangeActionCreator = (text) => (
+export const addPost = () => ({ type: ADD_POST });
+export const updateNewPostText = (text) => (
   {
     type: UPDATE_NEW_POST_TEXT,
     newText: text,
   }
 )
-export const removePostActionCreator = () => ({ type: REMOVE_POST })
+export const removePost = () => ({ type: REMOVE_POST })
 
 
 export default profileReducer;
