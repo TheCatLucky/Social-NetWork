@@ -8,7 +8,7 @@ const genId = () => { //кастомная генерация id
   return id;
 }
 
-let initialState = {
+const initialState = {
   postsData: [
     { id: genId(), message: "Hello", name: "Kira", age: "13" },
     { id: genId(), message: "How are you?", name: "Line", age: 52 },

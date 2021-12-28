@@ -5,8 +5,8 @@ const Post = (props) => {
   return (
     <div className={style.item}>
       <div className={style.message}>
-      <img className={style.img} src="https://www.film.ru/sites/default/files/filefield_paths/maxresdefault_1_24.jpg" alt="" />
-      <span className={style.message__text}>{props.message}</span>
+        <img className={style.img} src="https://www.film.ru/sites/default/files/filefield_paths/maxresdefault_1_24.jpg" alt="" />
+        <span className={style.message__text}>{props.message}</span>
       </div>
       <div className={style.item__info}>
         <span className={style.name}>Name: {props.name} Age: {props.age}</span>

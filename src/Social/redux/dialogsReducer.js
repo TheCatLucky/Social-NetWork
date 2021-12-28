@@ -5,7 +5,7 @@ const genId = () => { //кастомная генерация id
   let id = nanoid();
   return id;
 }
-let initialState = {
+const initialState = {
   dialogsData: [
     { id: genId(), name: "Петя" },
     { id: genId(), name: "Маша" },

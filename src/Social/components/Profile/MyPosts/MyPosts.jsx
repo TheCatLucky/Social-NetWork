@@ -1,7 +1,7 @@
+import { nanoid } from 'nanoid';
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
-import { nanoid } from 'nanoid';
 
 function genId() { //кастомная генерация id
   let modelId = nanoid();
