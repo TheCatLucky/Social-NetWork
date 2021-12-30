@@ -1,4 +1,5 @@
 import { nanoid } from 'nanoid';
+import { usersAPI } from './../API/Api';
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const REMOVE_POST = "REMOVE-POST";
@@ -63,10 +64,16 @@ export const updateNewPostText = (text) => (
   }
 )
 export const removePost = () => ({ type: REMOVE_POST })
-export const setUserProfile = (profile) => ({
+const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile
 })
 
+export const getProfile = (userId) => (dispatch) => {
+  usersAPI.getProfile(userId)
+    .then(data => {
+      dispatch(setUserProfile(data));
+    })
+}
 
 export default profileReducer;

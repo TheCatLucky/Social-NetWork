@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { NavLink } from 'react-router-dom';
 import userPhoto from "../../img/user_default.png";
 import style from './Users.module.css';
-import { usersAPI } from './../../API/Api';
 
 let Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -28,28 +27,10 @@ let Users = (props) => {
                 </NavLink>
                 {u.followed
                   ? <button disabled={props.followingProgress.some(id => id === u.id)}
-                    onClick={() => {
-                      props.toggleFollowingProgress(true, u.id);
-                      usersAPI.unfollowUser(u.id)
-                        .then(data => {
-                          if (data.resultCode === 0) {
-                            props.unfollow(u.id)
-                          }
-                          props.toggleFollowingProgress(false, u.id);
-                        })
-                    }}>
+                    onClick={() => { props.unfollow(u.id) }}>
                     Unfollow</button>
                   : <button disabled={props.followingProgress.some(id => id === u.id)}
-                    onClick={() => {
-                      props.toggleFollowingProgress(true, u.id);
-                      usersAPI.followUser(u.id)
-                        .then(data => {
-                          if (data.resultCode === 0) {
-                            props.follow(u.id)
-                          }
-                          props.toggleFollowingProgress(false, u.id);
-                        })
-                    }}>
+                    onClick={() => { props.follow(u.id) }}>
                     Follow</button>}
               </div>
               <div className={style.user_info}>
