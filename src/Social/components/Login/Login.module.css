@@ -1,0 +1,7 @@
+.login{
+  display: flex;
+  justify-content: center;
+}
+.login__a{
+  padding-left: 5px;
+}

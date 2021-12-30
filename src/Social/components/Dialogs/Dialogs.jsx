@@ -1,8 +1,9 @@
-import React from 'react';
-import style from './Dialogs.module.css';
-import DialogItem from "./DialogItem/DialogItem"
-import Message from "./Message/Message"
 import { nanoid } from 'nanoid';
+import React from 'react';
+import DialogItem from "./DialogItem/DialogItem";
+import style from './Dialogs.module.css';
+import Message from "./Message/Message";
+
 
 function genId() { //кастомная генерация id
   let modelId = nanoid();
