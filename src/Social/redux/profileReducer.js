@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
-import { usersAPI, profileAPI } from './../API/Api';
+import { profileAPI, usersAPI } from './../API/Api';
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const REMOVE_POST = "REMOVE-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
@@ -19,36 +18,29 @@ const initialState = {
     { id: genId(), message: "How old are you?", name: "Kostya", age: 53 },
     { id: genId(), message: "Glad to see you", name: "Dasha", age: 36 },
   ],
-  newPostText: "",
   profile: null,
   status: "",
 };
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      if (state.newPostText === "") {
+      if (action.postText === undefined) {
         return state;
       }
       let newPost = {
         id: genId(),
-        message: state.newPostText,
+        message: action.postText,
         name: "Masha",
         age: 20
       }
       return {
         ...state,
         postsData: [...state.postsData, newPost],
-        newPostText: ""
-      }
-    case UPDATE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText
       }
     case REMOVE_POST:
       return {
         ...state,
-        postsData: [...state.postsData].slice(0, state.postsData.length - 1)
+        postsData: [...state.postsData.slice(0, action.id),...state.postsData.slice(action.id + 1)]
       }
     case SET_USER_PROFILE:
       return {
@@ -69,14 +61,14 @@ const profileReducer = (state = initialState, action) => {
       return state;
   }
 }
-export const addPost = () => ({ type: ADD_POST });
-export const updateNewPostText = (text) => (
-  {
-    type: UPDATE_NEW_POST_TEXT,
-    newText: text,
-  }
-)
-export const removePost = () => ({ type: REMOVE_POST })
+export const addPost = (postText) => ({
+  type: ADD_POST,
+  postText: postText
+});
+export const removePost = (id) => ({
+  type: REMOVE_POST,
+  id
+})
 
 const setStatus = (status) => ({
   type: SET_STATUS,

@@ -2,6 +2,9 @@ import React from 'react';
 import style from './Post.module.css';
 
 const Post = (props) => {
+  const removePost = (id) => {
+    props.removePost(id) 
+  }
   return (
     <div className={style.item}>
       <div className={style.message}>
@@ -11,6 +14,7 @@ const Post = (props) => {
       <div className={style.item__info}>
         <span className={style.name}>Name: {props.name} Age: {props.age}</span>
         <span className={style.button__like} >Like</span>
+        <button onClick={() => removePost(props.id)} className={style.button__delete}>Удалить</button>
       </div>
     </div>
   );

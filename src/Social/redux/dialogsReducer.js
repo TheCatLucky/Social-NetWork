@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-const UPDATE_NEW_MEESSAGE_TEXT = "UPDATE-NEW-MEESSAGE-TEXT";
 const SEND_MESSAGE = "SEND-MESSAGE";
 const genId = () => { //кастомная генерация id
   let id = nanoid();
@@ -18,40 +17,32 @@ const initialState = {
     { id: genId(), message: "Как дела?" },
     { id: genId(), message: "Все гуд" },
   ],
-  newMessageText: ""
 }
 
 const diallogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case SEND_MESSAGE:
-      if (state.newMessageText === "") {
+      if (action.message === undefined) {
         return state;
       }
       let message = {
         id: genId(),
-        message: state.newMessageText,
+        message: action.message ,
       }
       return {
         ...state,
-        newMessageText: "",
         messagesData: [...state.messagesData, message]
       }
-    case UPDATE_NEW_MEESSAGE_TEXT:
-      return {
-        ...state,
-        newMessageText: action.message
-      }
+
     default:
       return state;
   }
 }
 
-export const sendMessage = () => ({ type: SEND_MESSAGE })
-export const updateNewMessageText = (text) => (
-  {
-    type: UPDATE_NEW_MEESSAGE_TEXT,
-    message: text
-  }
-)
+export const sendMessage = (message) => ({
+  type: SEND_MESSAGE,
+  message
+})
+
 
 export default diallogsReducer;

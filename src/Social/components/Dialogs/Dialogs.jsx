@@ -3,7 +3,7 @@ import React from 'react';
 import DialogItem from "./DialogItem/DialogItem";
 import style from './Dialogs.module.css';
 import Message from "./Message/Message";
-
+import MessageForm from './MessageForm/MessageForm';
 
 function genId() { //кастомная генерация id
   let modelId = nanoid();
@@ -20,14 +20,9 @@ const Dialogs = (props) => {
   let messagesResult = state.messagesData.map((id) => {
     return <Message key={genId()} id={id.id} message={id.message} />
   })
-  let newMessageText = state.newMessageText;
 
-  let onSendMessageClick = () => {
-    props.sendMessage();
-  }
-  let onMessageChange = (e) => {
-    let text = e.target.value;
-    props.updateNewMessageText(text);
+  let onSendMessageClick = (messageData) => {
+    props.sendMessage(messageData.dialogNewMessage);
   }
 
   return (
@@ -37,19 +32,7 @@ const Dialogs = (props) => {
       </div>
       <div className={style.messages}>Сообщения
         {messagesResult}
-        <div>
-          <textarea
-            className={style.message__zone}
-            cols={30}
-            rows={3}
-            placeholder='Введите сообщение'
-            value={newMessageText}
-            onChange={onMessageChange}>
-          </textarea>
-        </div>
-        <div>
-          <button onClick={onSendMessageClick}>Send message</button>
-        </div>
+        <MessageForm onSubmit={onSendMessageClick} />
       </div>
     </div>
   )

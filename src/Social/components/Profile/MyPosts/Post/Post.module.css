@@ -33,3 +33,6 @@
   align-items: center;
   justify-content: space-between;
 }
+.button__delete{
+  margin-left: 5px;
+}

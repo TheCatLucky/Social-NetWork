@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import React from 'react';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
+import NewPostForm from './PostForm/PostForm';
 
 function genId() { //кастомная генерация id
   let modelId = nanoid();
@@ -9,43 +10,30 @@ function genId() { //кастомная генерация id
 }
 
 const MyPosts = (props) => {
-  let postsResult = props.postsData.map((post) => {
+  let postsResult = props.postsData.map((post, index) => {
     return (
       <Post key={genId()}
+        id={index}
         message={post.message}
         name={post.name}
         age={post.age}
+        removePost={props.removePost}
       />)
   });
 
-  let onAddPost = () => {
-    props.addPost();
+  let addPost = (message) => {
+    props.addPost(message.newPost)
   }
-  let onPostChange = (e) => {
-    let text = e.target.value;
-    props.updateNewPostText(text);
-  }
-  let onRemovePost = () => {
-    props.removePost();
-  }
+
 
   return (
     <div className={style.posts}>
       <h3>My posts</h3>
       <div>
         <div>
-          <textarea
-            className={style.posts}
-            cols={40}
-            rows={4}
-            placeholder='Начните печатать свой пост'
-            value={props.newPostText}
-            onChange={onPostChange}
+          <NewPostForm
+            onSubmit={addPost}
           />
-        </div>
-        <div>
-          <button onClick={onAddPost}>Add post</button>
-          <button onClick={onRemovePost}>Remove</button>
         </div>
         {postsResult}
       </div>
