@@ -1,9 +1,11 @@
 import { nanoid } from 'nanoid';
-import { usersAPI } from './../API/Api';
+import { usersAPI, profileAPI } from './../API/Api';
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 const REMOVE_POST = "REMOVE-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
+const SET_STATUS = "SET_STATUS";
+const CHANGE_STATUS = "CHANGE_STATUS";
 const genId = () => { //кастомная генерация id
   let id = nanoid();
   return id;
@@ -19,6 +21,7 @@ const initialState = {
   ],
   newPostText: "",
   profile: null,
+  status: "",
 };
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -52,6 +55,16 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         profile: action.profile
       }
+    case SET_STATUS:
+      return {
+        ...state,
+        status: action.status
+      }
+    case CHANGE_STATUS:
+      return {
+        ...state,
+        status: action.status
+      }
     default:
       return state;
   }
@@ -64,15 +77,41 @@ export const updateNewPostText = (text) => (
   }
 )
 export const removePost = () => ({ type: REMOVE_POST })
+
+const setStatus = (status) => ({
+  type: SET_STATUS,
+  status: status
+})
 const setUserProfile = (profile) => ({
   type: SET_USER_PROFILE,
   profile
 })
 
+export const changeStatus = (status) => (
+  {
+    type: CHANGE_STATUS,
+    status
+  }
+)
+
 export const getProfile = (userId) => (dispatch) => {
   usersAPI.getProfile(userId)
     .then(data => {
       dispatch(setUserProfile(data));
+    })
+}
+export const getStatus = (status) => (dispatch) => {
+  profileAPI.getStatus(status)
+    .then(data => {
+      dispatch(setStatus(data));
+    })
+}
+export const updateStatus = (status) => (dispatch) => {
+  profileAPI.updateStatus(status)
+    .then(data => {
+      if (data.resultCode === 0) {
+        dispatch(setStatus(status));
+      }
     })
 }
 

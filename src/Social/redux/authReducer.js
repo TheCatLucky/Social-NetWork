@@ -1,11 +1,6 @@
-import { nanoid } from 'nanoid';
 import { authAPI } from './../API/Api';
 
 const SET_USER_DATA = "SET_USER_DATA";
-const genId = () => { //кастомная генерация id
-  let id = nanoid();
-  return id;
-}
 const initialState = {
   userId: null,
   email: null,
@@ -45,6 +40,16 @@ export const checkAuth = () => (dispatch) => {
     })
 }
 
+export const logIn = (email, password) => (dispatch) => {
+  console.log("object")
+  authAPI.logIn(email, password)
+    .then(data => {
+      if (data.resultCode === 0) {
+        let { id, login, email } = data.data;
+        dispatch(setAuthUserData(id, email, login));
+      }
+    })
+}
 
 
 export default authReducer;

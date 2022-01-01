@@ -10,7 +10,7 @@ const Users = (props) => {
     pages.push(i);
   }
   return (
-    <>
+    < >
       <div className={style.pagesNumber}>
         {pages.map(p => {
           return <span key={p} className={classNames(props.currentPage === p && style.selected, style.pageNumber)}
@@ -21,15 +21,15 @@ const Users = (props) => {
         props.users.map((u) => {
           return (
             <div key={u.id} className={style.user}>
-              <div>
+              <div className={style.users__ava}>
                 <NavLink to={'/profile/' + u.id}>
                   <img className={style.img} src={u.photos.small != null ? u.photos.small : userPhoto} alt='avatar' />
                 </NavLink>
                 {u.followed
-                  ? <button disabled={props.followingProgress.some(id => id === u.id)}
+                  ? <button className={style.users__button} disabled={props.followingProgress.some(id => id === u.id)}
                     onClick={() => { props.unfollow(u.id) }}>
                     Unfollow</button>
-                  : <button disabled={props.followingProgress.some(id => id === u.id)}
+                  : <button className={style.users__button} disabled={props.followingProgress.some(id => id === u.id)}
                     onClick={() => { props.follow(u.id) }}>
                     Follow</button>}
               </div>

@@ -1,11 +1,11 @@
 img {
   width: 100px;
 }
-div {
+.users__ava {
   display: flex;
   flex-direction: column;
 }
-button {
+.users__button {
   margin-top: 5px;
   width: 100px;
 }
