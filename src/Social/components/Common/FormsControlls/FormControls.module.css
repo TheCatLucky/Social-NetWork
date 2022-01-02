@@ -1,0 +1,15 @@
+.formControl input{
+ width: 200px;
+}
+.formControl input[type="checkbox"]{
+  width:15px
+}
+.formControl.error input,
+.formControl.error textarea{
+  margin-top: 5px;
+  border: solid white 2px
+}
+.formControl.error span{
+  padding-left: 5px;
+  color: white
+}

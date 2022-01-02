@@ -9,3 +9,7 @@ h3 {
   padding-left: 5px;
   resize: none;
 }
+.message__zone{
+  padding: 5px 5px;
+  resize: none;
+}

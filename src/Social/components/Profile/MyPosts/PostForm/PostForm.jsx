@@ -1,10 +1,15 @@
 import { Field, reduxForm, reset } from 'redux-form';
 import style from './../MyPosts.module.css';
+import { required, maxLengthCreator } from './../../../Utils/Validators/Validators';
+import { Textarea } from './../../../Common/FormsControlls/FormsControls';
+
+const maxLength10 = maxLengthCreator(10);
 const NewPost = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <Field name={"newPost"} component={"textarea"}
-        cols={30} rows={3}
+      <Field name={"newPost"} component={Textarea}
+        validate={[required, maxLength10]}
+        cols={50} rows={3}
         placeholder={'Введите текст поста'} className={style.message__zone}
       />
       <div>

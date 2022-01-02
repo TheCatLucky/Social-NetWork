@@ -1,12 +1,16 @@
-.login{
+.login {
   display: flex;
   justify-content: center;
 }
-.login__a{
+.login__a {
   padding-left: 5px;
 }
-.login__form{
+.login__form {
   display: flex;
   flex-direction: column;
   padding-left: 5px;
+}
+.login__remember {
+  display: flex;
+ 
 }

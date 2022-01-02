@@ -47,19 +47,30 @@ export const authAPI = {
   getMe() {
     return instance.get(`auth/me`)
       .then(response => {
-        console.log(response.status);
+        console.log(response.status, "Авторизация");
         return (
           response.data
         )
       })
   },
-  logIn(email, password) {
+  logIn(email, password, rememberMe) {
     return instance.post(`auth/login`, {
       email,
-      password
+      password,
+      rememberMe
     })
       .then(response => {
-        console.log(response.status);
+        console.log(response.status, "Залогинен");
+        console.log(response.data);
+        return (
+          response.data
+        )
+      })
+  },
+  logOut() {
+    return instance.delete(`auth/login`)
+      .then(response => {
+        console.log(response.status, "Разлогинен");
         console.log(response.data);
         return (
           response.data
@@ -71,7 +82,7 @@ export const profileAPI = {
   getProfile(id) {
     return instance.get(`profile/${id}`)
       .then(response => {
-        console.log(response.status);
+        console.log(response.status, "Получение профиля");
         return (
           response.data
         )
@@ -80,7 +91,7 @@ export const profileAPI = {
   getStatus(id) {
     return instance.get(`/profile/status/${id}`)
       .then(response => {
-        console.log(response.status);
+        console.log(response.status, "Получение статуса");
         return (
           response.data
         )
@@ -91,7 +102,7 @@ export const profileAPI = {
       status,
     })
       .then(response => {
-        console.log(response.status);
+        console.log(response.status, "Обновление статуса");
         return (
           response.data
         )
