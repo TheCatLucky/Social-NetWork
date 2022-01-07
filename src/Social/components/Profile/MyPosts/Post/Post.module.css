@@ -10,7 +10,7 @@
   height: 50px;
   border-radius: 30px;
 }
-.button__like {
+.buttonLike {
   font-size: 10px;
   color: aqua;
 }
@@ -23,16 +23,16 @@
   flex-direction: row;
   align-items: center;
 }
-.message__text {
+.messageText {
   padding-left: 20px;
 }
-.item__info {
+.itemInfo {
   width: 100px;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 }
-.button__delete{
+.buttonDelete{
   margin-left: 5px;
 }

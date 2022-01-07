@@ -10,7 +10,7 @@ const NewPost = (props) => {
       <Field name={"newPost"} component={Textarea}
         validate={[required, maxLength10]}
         cols={50} rows={3}
-        placeholder={'Введите текст поста'} className={style.message__zone}
+        placeholder={'Введите текст поста'} className={style.messageArea}
       />
       <div>
         <button>Отправить пост</button>

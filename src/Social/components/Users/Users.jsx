@@ -21,22 +21,22 @@ const Users = (props) => {
         props.users.map((u) => {
           return (
             <div key={u.id} className={style.user}>
-              <div className={style.users__ava}>
+              <div className={style.ava}>
                 <NavLink to={'/profile/' + u.id}>
                   <img className={style.img} src={u.photos.small != null ? u.photos.small : userPhoto} alt='avatar' />
                 </NavLink>
                 {u.followed
-                  ? <button className={style.users__button} disabled={props.followingProgress.some(id => id === u.id)}
+                  ? <button className={style.button} disabled={props.followingProgress.some(id => id === u.id)}
                     onClick={() => { props.unfollow(u.id) }}>
                     Unfollow</button>
-                  : <button className={style.users__button} disabled={props.followingProgress.some(id => id === u.id)}
+                  : <button className={style.button} disabled={props.followingProgress.some(id => id === u.id)}
                     onClick={() => { props.follow(u.id) }}>
                     Follow</button>}
               </div>
-              <div className={style.user_info}>
+              <div className={style.userInfo}>
                 <div className={style.name}>
                   <div>{u.name} </div>
-                  <div className={style.name_name}>{u.status}</div>
+                  <div className={style.userName}>{u.status}</div>
                 </div>
               </div>
             </div>)

@@ -5,10 +5,10 @@
 .dialogs {
   padding: 10px 0px 0px 10px;
 }
-.dialogs__item {
+.item {
   padding-top: 10px;
 }
-.dialogs__item a {
+.item a {
   text-decoration: none;
   color: white;
 }
@@ -18,10 +18,10 @@ a.active {
 .messages {
   padding: 10px 0px 0px 10px;
 }
-.messages__item {
+.messageItem {
   padding-top: 10px;
 }
-.message__zone {
+.messageArea {
   margin-top: 10px;
   width: 300px;
   resize: none;

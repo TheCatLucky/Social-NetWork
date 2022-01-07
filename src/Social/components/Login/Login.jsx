@@ -18,7 +18,7 @@ const Login = (props) => {
     <div>
       <h1>Login</h1>
       <ReduxLoginForm onSubmit={onSubmit} />
-      <p className={style.login}>Нужно залогиниться на<a href="https://social-network.samuraijs.com/" className={style.login__a} target="_blank" rel="noreferrer">сайте</a>,
+      <p className={style.login}>Нужно залогиниться на<a href="https://social-network.samuraijs.com/" className={style.a} target="_blank" rel="noreferrer">сайте</a>,
         прежде чем смотреть страницы сайта!</p>
     </div>
   )
@@ -26,23 +26,23 @@ const Login = (props) => {
 
 const LoginForm = (props) => {
   return (
-    <form className={style.login__form} onSubmit={props.handleSubmit}>
+    <form className={style.form} onSubmit={props.handleSubmit}>
       <div>
         <Field name={"login"} component={Input}
-          validate={[required]} className={style.login__input}
+          validate={[required]} className={style.formInput}
           placeholder={"Login"}
         />
       </div>
       <div>
         <Field name={"password"} component={Input}
-          validate={[required]} className={style.login__input}
+          validate={[required]} className={style.formInput}
           placeholder={"Password"} type={"password"}
         />
       </div>
-      <div className={style.login__remember}>
+      <div className={style.remember}>
         <Field name={"rememberMe"} component={Input}
-          type={"checkbox"}
-          className={style.login__remember}
+          type={"checkbox"} 
+          className={style.remember}
         />remember me
       </div>
       <div>

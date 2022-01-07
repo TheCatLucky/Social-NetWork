@@ -1,11 +1,11 @@
-img {
+.img {
   width: 100px;
 }
-.users__ava {
+.ava {
   display: flex;
   flex-direction: column;
 }
-.users__button {
+.button {
   margin-top: 5px;
   width: 100px;
 }
@@ -15,7 +15,7 @@ img {
   margin-bottom: 10px;
   justify-content: space-between;
 }
-.user_info {
+.userInfo {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -30,7 +30,7 @@ img {
   flex-direction: column;
   margin-left: 20px;
 }
-.name_name {
+.userName {
   margin-top: 10px;
 }
 .selected{

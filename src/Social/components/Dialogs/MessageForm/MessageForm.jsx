@@ -10,7 +10,7 @@ const NewMessge = (props) => {
       <Field name={"dialogNewMessage"} component={Textarea}
         validate={[required, maxLength]}
         cols={30} rows={3} 
-        placeholder={'Введите сообщение'} className={style.message__zone}
+        placeholder={'Введите сообщение'} className={style.messageArea}
       />
       <div>
         <button>Отправить сообщение</button>
