@@ -4,8 +4,8 @@ const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",
   withCredentials: true,
   headers: {
-    "API-KEY": "bd9714f6-c218-4b7b-a6dd-1b93dea43c0c"
-    //bd9714f6-c218-4b7b-a6dd-1b93dea43c0c
+    "API-KEY": "c1f0b7d1-dc16-41bd-b130-0fd123149d60"
+    //c1f0b7d1-dc16-41bd-b130-0fd123149d60
     //52d41bee-1ff2-442f-88ef-58198d527466
   }
 })
@@ -60,7 +60,7 @@ export const authAPI = {
       rememberMe
     })
       .then(response => {
-        console.log(response.status, "Залогинен");
+        console.log(response.status, "Логинизация");
         console.log(response.data);
         return (
           response.data

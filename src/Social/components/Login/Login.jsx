@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom';
 
 const Login = (props) => {
   const onSubmit = (formData) => {
-    props.logIn(formData.login, formData.password, formData.rememberMe);
+    props.logIn(formData.email, formData.password, formData.rememberMe);
   }
   if (props.isAuth) {
     return <Navigate to={"/profile"} />
@@ -27,8 +27,11 @@ const Login = (props) => {
 const LoginForm = (props) => {
   return (
     <form className={style.form} onSubmit={props.handleSubmit}>
+      {props.error && <p className={style.formSummaryError}>
+        Password or Email is wrong!
+      </p>}
       <div>
-        <Field name={"login"} component={Input}
+        <Field name={"email"} component={Input}
           validate={[required]} className={style.formInput}
           placeholder={"Login"}
         />
@@ -41,7 +44,7 @@ const LoginForm = (props) => {
       </div>
       <div className={style.remember}>
         <Field name={"rememberMe"} component={Input}
-          type={"checkbox"} 
+          type={"checkbox"}
           className={style.remember}
         />remember me
       </div>

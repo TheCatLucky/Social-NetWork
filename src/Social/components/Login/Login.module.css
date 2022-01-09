@@ -13,6 +13,12 @@
   display: flex;
   margin-bottom: 5px;
 }
-.formInput{
-  margin: 5px 0px
+.formInput {
+  margin: 5px 0px;
+}
+.formSummaryError {
+  padding: 5px;
+  margin: 5px 0px;
+  border: solid red 2px;
+  color: red;
 }
