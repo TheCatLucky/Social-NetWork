@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Preloader from '../Common/Preloader/Preloader';
 import { follow, getUsers, unfollow } from './../../redux/usersReducer';
-import { getCurrentPageSelector, getFollowingProgressSelector, getIsFetchingSelector, getPageSizeSelector, getTotalUsersCountSelector, getUsersSelector } from './../../redux/usersSelectors';
+import { getCurrentPageSelector, getUsersSelectorSuper, getFollowingProgressSelector, getIsFetchingSelector, getPageSizeSelector, getTotalUsersCountSelector, getUsersSelector } from './../../redux/usersSelectors';
 import Users from './Users';
 
 
@@ -46,8 +46,10 @@ class UsersContainer extends React.Component {
   }
 } */
 let mapStateToProps = (state) => {
+  console.log('mstp USERS')
   return {
-    users: getUsersSelector(state),
+   //users: getUsersSelector(state),
+    users: getUsersSelectorSuper(state),
     pageSize: getPageSizeSelector(state),
     totalUsersCount: getTotalUsersCountSelector(state),
     currentPage: getCurrentPageSelector(state),

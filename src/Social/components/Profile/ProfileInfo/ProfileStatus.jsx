@@ -1,51 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './ProfileStatus.module.css';
-class ProfileStatus extends React.Component {
-  state = {
-    editMode: false,
-    status: this.props.status
+const ProfileStatusWithHooks = (props) => {
+
+  const [editMode, setEditMode] = useState(false);
+  const [status, setStatus] = useState(props.status);
+
+  const activateEditMode = () => {
+    setEditMode(true)
   }
-  activateEditMode = () => {
-    this.setState({
-      editMode: true
-    });
-  }
-  deactivateEditMode = () => {
-    this.setState({
-      editMode: false
-    });
-    this.props.updateStatus(this.state.status)
+  const deActivateEditMode = () => {
+    setEditMode(false)
+    props.updateStatus(status)
   }
 
-  onStatusChange = (e) => {
-    this.setState({
-      status: e.target.value
-    })
+  const onStatusChange = (e) => {
+    setStatus(e.currentTarget.value)
   }
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.status !== this.props.status) {
-      this.setState({
-        status: this.props.status
-      });
-    }
-  }
-  render() {
-    return (
-      <>
-        {!this.state.editMode &&
-          <div>
-            <span onDoubleClick={this.activateEditMode}>{this.props.status || "No status"}</span>
-          </div>}
-        {this.state.editMode &&
-          <div>
-            <input onBlur={this.deactivateEditMode} autoFocus className={style.input}
-              value={this.state.status} onChange={this.onStatusChange}></input>
-          </div>}
-      </>
-    )
-  }
-
+  return (
+    <>
+      {!editMode &&
+        <div>
+          <span onDoubleClick={activateEditMode}>{props.status || "No status"}</span>
+      </div>}
+      {editMode &&
+        <div>
+          <input autoFocus className={style.input}
+            onBlur={deActivateEditMode}
+            onChange={onStatusChange}
+            value={status}
+          ></input>
+        </div>}
+    </>
+  )
 }
 
 
-export default ProfileStatus
+
+
+
+
+
+export default ProfileStatusWithHooks
