@@ -1,5 +1,6 @@
 /* import { nanoid } from 'nanoid'; */
 import { usersAPI } from './../API/Api';
+import {updObjInArray} from "./../components/Utils/Helper/ObjectHelper"
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET_USERS";
@@ -80,22 +81,12 @@ const usersReducer = (state = initialState, action) => {
     case FOLLOW:
       return {
         ...state,
-        usersData: state.usersData.map(u => {
-          if (u.id === action.userId) {
-            return { ...u, followed: true }
-          }
-          return u;
-        })
+        usersData: updObjInArray(state.usersData, action.userId, "id", { followed: true} )
       }
     case UNFOLLOW:
       return {
         ...state,
-        usersData: state.usersData.map(u => {
-          if (u.id === action.userId) {
-            return { ...u, followed: false }
-          }
-          return u;
-        })
+        usersData: updObjInArray(state.usersData, action.userId, "id", { followed: false} )
       }
     case SET_USERS: {
       return {
@@ -187,25 +178,25 @@ export const getUsers = (currentPage, pageSize) => (dispatch) => {
     dispatch(setTotalUsersCount(data.totalCount));
   })
 }
-export const follow = (userId) => (dispatch) => {
+const followUnfollowFlow = (dispatch, userId, apiMethod, actionCreator) => {
   dispatch(toggleFollowingProgress(true, userId));
-  usersAPI.followUser(userId)
+  apiMethod(userId)
     .then(data => {
       if (data.resultCode === 0) {
-        dispatch(acceptFollow(userId))
+        dispatch(actionCreator(userId))
       }
       dispatch(toggleFollowingProgress(false, userId));
     })
 }
+export const follow = (userId) => (dispatch) => {
+  let apiMethod = usersAPI.followUser;
+  let actionCreator = acceptFollow;
+  followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+}
 export const unfollow = (userId) => (dispatch) => {
-  dispatch(toggleFollowingProgress(true, userId));
-  usersAPI.unfollowUser(userId)
-    .then(data => {
-      if (data.resultCode === 0) {
-        dispatch(acceptUnfollow(userId))
-      }
-      dispatch(toggleFollowingProgress(false, userId));
-    })
+  let apiMethod = usersAPI.unfollowUser;
+  let actionCreator = acceptUnfollow;
+  followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
 }
 
 

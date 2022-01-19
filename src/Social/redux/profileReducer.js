@@ -1,22 +1,18 @@
-import { nanoid } from 'nanoid';
 import { profileAPI, usersAPI } from './../API/Api';
 const ADD_POST = 'ADD-POST';
 const REMOVE_POST = "REMOVE-POST";
 const SET_USER_PROFILE = "SET_USER_PROFILE";
 const SET_STATUS = "SET_STATUS";
 const CHANGE_STATUS = "CHANGE_STATUS";
-const genId = () => { //кастомная генерация id
-  let id = nanoid();
-  return id;
-}
+
 
 const initialState = {
   postsData: [
-    { id: genId(), message: "Hello", name: "Kira", age: "13" },
-    { id: genId(), message: "How are you?", name: "Line", age: 52 },
-    { id: genId(), message: "Are you fine?", name: "Lina", age: 12 },
-    { id: genId(), message: "How old are you?", name: "Kostya", age: 53 },
-    { id: genId(), message: "Glad to see you", name: "Dasha", age: 36 },
+    { id: 1, message: "Hello", name: "Kira", age: "13" },
+    { id: 2, message: "How are you?", name: "Line", age: 52 },
+    { id: 3, message: "Are you fine?", name: "Lina", age: 12 },
+    { id: 4, message: "How old are you?", name: "Kostya", age: 53 },
+    { id: 5, message: "Glad to see you", name: "Dasha", age: 36 },
   ],
   profile: null,
   status: "",
@@ -28,7 +24,7 @@ const profileReducer = (state = initialState, action) => {
         return state;
       }
       let newPost = {
-        id: genId(),
+        id: state.postsData.length + 1,
         message: action.postText,
         name: "Masha",
         age: 20
@@ -40,7 +36,7 @@ const profileReducer = (state = initialState, action) => {
     case REMOVE_POST:
       return {
         ...state,
-        postsData: [...state.postsData.slice(0, action.id),...state.postsData.slice(action.id + 1)]
+        postsData: state.postsData.filter(p => p.id !== action.id)
       }
     case SET_USER_PROFILE:
       return {

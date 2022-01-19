@@ -25,7 +25,6 @@ const MyPosts = (props) => {
     props.addPost(message.newPost)
   }
 
-
   return (
     <div className={style.posts}>
       <h3>My posts</h3>

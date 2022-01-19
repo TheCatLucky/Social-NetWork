@@ -1,47 +1,21 @@
-import classNames from 'classnames';
-import { NavLink } from 'react-router-dom';
-import userPhoto from "../../img/user_default.png";
-import style from './Users.module.css';
-
+import Paginatior from './Paginatior';
+import User from "./User";
 const Users = (props) => {
-  let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-  let pages = [];
-  for (let i = 1; i <= pagesCount; i++) {
-    pages.push(i);
-  }
   return (
-    < >
-      <div className={style.pagesNumber}>
-        {pages.map(p => {
-          return <span key={p} className={classNames(props.currentPage === p && style.selected, style.pageNumber)}
-            onClick={() => { props.onPageChanged(p) }}>{p}</span>
-        })}
-      </div>
-      {
-        props.users.map((u) => {
-          return (
-            <div key={u.id} className={style.user}>
-              <div className={style.ava}>
-                <NavLink to={'/profile/' + u.id}>
-                  <img className={style.img} src={u.photos.small != null ? u.photos.small : userPhoto} alt='avatar' />
-                </NavLink>
-                {u.followed
-                  ? <button className={style.button} disabled={props.followingProgress.some(id => id === u.id)}
-                    onClick={() => { props.unfollow(u.id) }}>
-                    Unfollow</button>
-                  : <button className={style.button} disabled={props.followingProgress.some(id => id === u.id)}
-                    onClick={() => { props.follow(u.id) }}>
-                    Follow</button>}
-              </div>
-              <div className={style.userInfo}>
-                <div className={style.name}>
-                  <div>{u.name} </div>
-                  <div className={style.userName}>{u.status}</div>
-                </div>
-              </div>
-            </div>)
-        })
-      }
+    <>
+      <Paginatior
+        totalUsersCount={props.totalUsersCount}
+        pageSize={props.pageSize}
+        currentPage={props.currentPage}
+        onPageChanged={props.onPageChanged}
+      />
+      {props.users.map((u) => <User user={u}
+        key={u.id}
+        followingProgress={props.followingProgress}
+        follow={props.follow}
+        unfollow={props.unfollow}
+      />
+      )}
     </>
   )
 }

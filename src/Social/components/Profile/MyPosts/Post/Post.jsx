@@ -3,6 +3,7 @@ import style from './Post.module.css';
 
 const Post = (props) => {
   const removePost = (id) => {
+    console.log(id);
     props.removePost(id) 
   }
   return (
