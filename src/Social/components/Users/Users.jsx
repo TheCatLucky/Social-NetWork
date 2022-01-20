@@ -8,6 +8,7 @@ const Users = (props) => {
         pageSize={props.pageSize}
         currentPage={props.currentPage}
         onPageChanged={props.onPageChanged}
+        portionSize={10}
       />
       {props.users.map((u) => <User user={u}
         key={u.id}

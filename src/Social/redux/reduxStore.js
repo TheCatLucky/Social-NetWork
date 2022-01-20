@@ -7,6 +7,8 @@ import diallogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
 import usersReducer from "./usersReducer";
 
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 const reducers = combineReducers({
   profilePage: profileReducer,
   dialogsPage: diallogsReducer,
@@ -16,6 +18,11 @@ const reducers = combineReducers({
   app: appReducer
 });
 
-let store = createStore(reducers, applyMiddleware(thunk));
+const store = createStore(
+  reducers,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
+);
 window.store = store;
 export default store;
