@@ -9,12 +9,17 @@ const ProfileInfo = (props) => {
     return <Preloader />
   }
   let avatar = props.profile.photos.small;
-
+  const handlePhoto = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0])
+    }
+}
   return (
     <div className={style.profile}>
       <div>
         <p>{props.profile.fullName}</p>
         <img className={style.avatar} src={avatar ? avatar : userPhoto} alt="avatar" />
+        {props.isOwner && <input type={"file"} onChange={handlePhoto} />}
         <ProfileStatus
           status={props.status}
           updateStatus={props.updateStatus}

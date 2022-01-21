@@ -107,5 +107,20 @@ export const profileAPI = {
           response.data
         )
       })
+  },
+  savePhoto(image) {
+    const formData = new FormData();
+    formData.append("image", image)
+    return instance.put(`/profile/photo`, formData, {
+      headers: {
+        'Content-Type': 'multipart*form-data'
+      }
+    })
+      .then(response => {
+        console.log(response.status, "Фото отправлено");
+        return (
+          response.data
+        )
+      })
   }
 }
