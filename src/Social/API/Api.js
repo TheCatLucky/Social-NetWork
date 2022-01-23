@@ -124,3 +124,14 @@ export const profileAPI = {
       })
   }
 }
+export const securityAPI = {
+  getCaptureUrl() {
+    return instance.get(`security/get-captcha-url`)
+      .then(response => {
+        console.log(response.status, "Получение капчи");
+        return (
+          response.data
+        )
+      })
+  }
+}

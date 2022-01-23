@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Preloader from '../Common/Preloader/Preloader';
 import { follow, getUsers, unfollow } from './../../redux/usersReducer';
-import { getCurrentPageSelector, getUsersSelectorSuper, getFollowingProgressSelector, getIsFetchingSelector, getPageSizeSelector, getTotalUsersCountSelector, getUsersSelector } from './../../redux/usersSelectors';
+import { getCurrentPageSelector, getFollowingProgressSelector, getIsFetchingSelector, getPageSizeSelector, getTotalUsersCountSelector, getUsersSelectorSuper } from './../../redux/usersSelectors';
 import Users from './Users';
 
 

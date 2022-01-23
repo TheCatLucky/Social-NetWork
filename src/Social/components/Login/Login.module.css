@@ -22,3 +22,7 @@
   border: solid red 2px;
   color: red;
 }
+.captcha{
+  height: 75px;
+  width: 150px;
+}

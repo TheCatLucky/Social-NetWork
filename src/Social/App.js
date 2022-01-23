@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import "./App.css";
 import Preloader from './components/Common/Preloader/Preloader';
 import HeaderContainer from './components/Header/HeaderContainer';
@@ -26,8 +26,11 @@ class App extends React.Component {
           <HeaderContainer />
           <Navbar />
           <div className="app-wrapper-content">
-            <Suspense fallback={<Preloader/>}>
+            <Suspense fallback={<Preloader />}>
               <Routes>
+                <Route path="/" element={
+                  <Navigate to="/profile"
+                  />} />
                 <Route path="/dialogs/*" element={
                   <DialogsContainer
                     store={this.props.store}
@@ -44,6 +47,8 @@ class App extends React.Component {
                   <LoginContainer
                     store={this.props.store}
                   />} />
+                <Route path="*" element={
+                  <div>404 not found</div>} />
               </Routes>
             </Suspense>
           </div>
