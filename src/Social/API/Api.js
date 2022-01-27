@@ -53,11 +53,12 @@ export const authAPI = {
         )
       })
   },
-  logIn(email, password, rememberMe) {
+  logIn(email, password, rememberMe, captcha) {
     return instance.post(`auth/login`, {
       email,
       password,
-      rememberMe
+      rememberMe,
+      captcha
     })
       .then(response => {
         console.log(response.status, "Логинизация");
