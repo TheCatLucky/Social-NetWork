@@ -25,7 +25,6 @@ const Login = (props) => {
 }
 
 const LoginForm = (props) => {
- 
   return (
     <form className={style.form} onSubmit={props.handleSubmit}>
       {props.error && <p className={style.formSummaryError}>

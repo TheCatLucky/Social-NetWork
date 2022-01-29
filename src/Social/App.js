@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import "./App.css";
 import Preloader from './components/Common/Preloader/Preloader';
-import HeaderContainer from './components/Header/HeaderContainer';
+import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
 import { initializeApp } from './redux/appReducer';
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
@@ -23,7 +23,7 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="app-wrapper">
-          <HeaderContainer />
+          <Header />
           <Navbar />
           <div className="app-wrapper-content">
             <Suspense fallback={<Preloader />}>

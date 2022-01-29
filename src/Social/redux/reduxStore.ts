@@ -7,22 +7,17 @@ import diallogsReducer from "./dialogsReducer";
 import profileReducer from "./profileReducer";
 import usersReducer from "./usersReducer";
 
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { composeWithDevTools } from "redux-devtools-extension";
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
   profilePage: profileReducer,
   dialogsPage: diallogsReducer,
   usersPage: usersReducer,
   auth: authReducer,
   form: formReducer,
-  app: appReducer
+  app: appReducer,
 });
-
-const store = createStore(
-  reducers,
-  composeWithDevTools(
-    applyMiddleware(thunk)
-  )
-);
-window.store = store;
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>;
 export default store;
