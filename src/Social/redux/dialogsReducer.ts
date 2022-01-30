@@ -27,7 +27,8 @@ const initialState = {
   ] as Array<MessagesType>,
 };
 
-const diallogsReducer = (state: InitialStateType = initialState, action: any): InitialStateType => {
+type ActionType = SendMessageType;
+const diallogsReducer = (state: InitialStateType = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case SEND_MESSAGE:
       if (action.message === undefined) {

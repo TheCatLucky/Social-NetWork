@@ -10,10 +10,10 @@ function genId() { //кастомная генерация id
 }
 
 const MyPosts = (props) => {
-  let postsResult = props.postsData.map((post, index) => {
+  let postsResult = props.postsData.map((post) => {
     return (
       <Post key={genId()}
-        id={index}
+        id={post.id}
         message={post.message}
         name={post.name}
         age={post.age}

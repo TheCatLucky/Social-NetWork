@@ -1,29 +1,28 @@
-import { nanoid } from 'nanoid';
 import React from 'react';
 import DialogItem from "./DialogItem/DialogItem";
 import style from './Dialogs.module.css';
 import Message from "./Message/Message";
 import MessageForm from './MessageForm/MessageForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../redux/reduxStore';
+import { sendMessage } from '../../redux/dialogsReducer';
 
-function genId() { //кастомная генерация id
-  let modelId = nanoid();
-  return modelId;
-}
-
-const Dialogs = (props) => {
-
-  let state = props.dialogsPage;
-
+type DialogsFormType = {
+  dialogNewMessage: string
+};
+const Dialogs = () => {
+  const state = useSelector((state: AppStateType) => state.dialogsPage)
+  const dispatch = useDispatch()
   let dialogResult = state.dialogsData.map((id) => {
-    return <DialogItem key={genId()} id={id.id} name={id.name} />
+    return <DialogItem key={id.id} id={id.id} name={id.name} />
   })
   let messagesResult = state.messagesData.map((id) => {
-    return <Message key={genId()} id={id.id} message={id.message} />
+    return <Message key={id.id} id={id.id} message={id.message} />
   })
 
-  let onSendMessageClick = (messageData) => {
-    props.sendMessage(messageData.dialogNewMessage);
-  }
+  let onSendMessageClick = (messageData: DialogsFormType) => {
+    dispatch(sendMessage(messageData.dialogNewMessage));
+  };
 
   return (
     <div className={style.page}>

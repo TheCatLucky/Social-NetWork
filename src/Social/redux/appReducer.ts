@@ -8,8 +8,9 @@ type InitialStateType = typeof initialState;
 let initialState = {
   initialized: false as boolean,
 };
+type ActionType = SetInitializeType;
 
-const appReducer = (state = initialState, action: any): InitialStateType => {
+const appReducer = (state = initialState, action: ActionType): InitialStateType => {
   switch (action.type) {
     case SET_INITIALIZE:
       return {
