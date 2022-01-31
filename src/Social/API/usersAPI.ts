@@ -1,4 +1,4 @@
-import { GetItemsType, instance } from "./Api";
+import { GetItemsType, instance, ResponseType } from "./Api";
 export const usersAPI = {
   getUsers(currentPage: number, pageSize: number) {
     return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}`).then((response) => {

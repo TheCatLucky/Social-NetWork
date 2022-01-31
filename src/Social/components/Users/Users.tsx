@@ -7,7 +7,6 @@ import User from "./User";
 
 type PropsType = {
   users: Array<UserType>
-  onPageChanged: (pageNumber: number) => void;
 };
 const Users: FC<PropsType> = (props) => {
   const totalUsersCount = useSelector((state: AppStateType) => state.usersPage.totalUsersCount);
@@ -19,7 +18,6 @@ const Users: FC<PropsType> = (props) => {
         totalUsersCount={totalUsersCount}
         pageSize={pageSize}
         currentPage={currentPage}
-        onPageChanged={props.onPageChanged}
         portionSize={10}
       />
       {props.users.map((u) => (

@@ -3,15 +3,27 @@ import Preloader from '../../Common/Preloader/Preloader';
 import userPhoto from "./../../../img/user_default.png";
 import style from './ProfileInfo.module.css';
 import ProfileStatus from './ProfileStatus';
+import { FC } from 'react';
+import { ProfileType } from '../../../types/types';
+import { useDispatch } from 'react-redux';
+import { savePhoto } from '../../../redux/profileReducer';
+import { ChangeEvent } from 'react';
 
-const ProfileInfo = (props) => {
+type Props = {
+  profile: ProfileType,
+  isOwner: boolean,
+  status: string,
+}
+
+const ProfileInfo: FC<Props> = (props) => {
+  const dispatch = useDispatch();
   if (!props.profile) {
     return <Preloader />
   }
   let avatar = props.profile.photos.small;
-  const handlePhoto = (e) => {
-    if (e.target.files.length) {
-      props.savePhoto(e.target.files[0])
+  const handlePhoto = (e:ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length) {
+      dispatch(savePhoto(e.target.files[0]));
     }
   }
   return (
@@ -22,8 +34,6 @@ const ProfileInfo = (props) => {
         {props.isOwner && <input type={"file"} onChange={handlePhoto} />}
         <ProfileStatus
           status={props.status}
-          updateStatus={props.updateStatus}
-          changeStatus={props.changeStatus}
         />
       </div>
     </div>

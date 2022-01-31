@@ -4,6 +4,7 @@ import { Textarea } from '../../Common/FormsControlls/FormsControls';
 import { maxLengthCreator, required } from '../../Utils/Validators/Validators';
 import style from './../Dialogs.module.css';
 const maxLength = maxLengthCreator(50);
+
 type DialogsFormType = {
   dialogNewMessage: string;
 };

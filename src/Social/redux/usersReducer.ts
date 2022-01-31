@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { ResultCodesEnum } from "../API/Api";
+import { ResponseType, ResultCodesEnum } from "../API/Api";
 import { usersAPI } from "../API/usersAPI";
 import { updObjInArray } from "../components/Utils/Helper/ObjectHelper";
 import { UserType } from "../types/types";
@@ -118,11 +118,11 @@ export const getUsers =
 const _followUnfollowFlow = (
   dispatch: Dispatch<ActionsType>,
   userId: number,
-  apiMethod: any,
+  apiMethod: (userId:number) => Promise<ResponseType>,
   actionCreator: (userId: number) => ActionsType
 ) => {
   dispatch(actions.toggleFollowingProgress(true, userId));
-  apiMethod(userId).then((data: any) => {
+  apiMethod(userId).then((data) => {
     if (data.resultCode === ResultCodesEnum.Success) {
       dispatch(actionCreator(userId));
     }

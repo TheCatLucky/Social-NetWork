@@ -1,14 +1,15 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateStatus } from "../../../redux/profileReducer";
 import style from "./ProfileStatus.module.css";
 
 type PropsType = {
   status: string;
-  updateStatus : (status:string) => void
 };
 const ProfileStatusWithHooks: FC<PropsType> = (props) => {
   const [editMode, setEditMode] = useState(false);
   const [status, setStatus] = useState<string>(props.status);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     setStatus(props.status);
   }, [props.status]);
@@ -18,7 +19,7 @@ const ProfileStatusWithHooks: FC<PropsType> = (props) => {
   };
   const deActivateEditMode = () => {
     setEditMode(false);
-    props.updateStatus(status);
+    dispatch(updateStatus(status));
   };
 
   const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {

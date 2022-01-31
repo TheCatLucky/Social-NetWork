@@ -48,11 +48,7 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
         ...state,
         status: action.status,
       };
-    case "CHANGE_STATUS":
-      return {
-        ...state,
-        status: action.status,
-      };
+  
     case "SET_PHOTO_SUCCESS":
       return {
         ...state,
@@ -88,11 +84,7 @@ export const actions = {
       type: "SET_USER_PROFILE",
       profile,
     } as const),
-  changeStatus: (status: string) =>
-    ({
-      type: "CHANGE_STATUS",
-      status,
-    } as const),
+ 
 };
 export const getProfile =
   (userId: number): ThunkType =>

@@ -5,35 +5,20 @@ import { getUsers } from "../../redux/usersReducer";
 import Preloader from "../Common/Preloader/Preloader";
 import Users from "./Users";
 
-type PropsType = {
-  totalUsersCount: number;
-  pageSize: number;
-  portionSize: number;
-  currentPage: number;
-  userId: number;
-  isFetching: boolean;
-  onPageChanged: (pageNumber: number) => void;
-};
-
-const UsersContainer: FC<PropsType> = (props) => {
+const UsersContainer: FC = () => {
+  const pageSize = useSelector((state: AppStateType) => state.usersPage.pageSize);
+  const currentPage = useSelector((state: AppStateType) => state.usersPage.currentPage);
   const users = useSelector((state: AppStateType) => state.usersPage.usersData);
   const isFetching = useSelector((state: AppStateType) => state.usersPage.isFetching);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUsers(props.currentPage, props.pageSize));
-  }, [props]);
-
-  const onPageChanged = (pageNumber: number) => {
-    dispatch(getUsers(pageNumber, props.pageSize));
-  };
+    dispatch(getUsers(currentPage, pageSize));
+  }, [currentPage]);
 
   return (
     <>
       {isFetching ? <Preloader /> : null}
-      <Users
-        users={users}
-        onPageChanged={onPageChanged}
-      />
+      <Users users={users} />
     </>
   );
 };

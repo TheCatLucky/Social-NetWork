@@ -1,31 +1,33 @@
 import { nanoid } from 'nanoid';
-import React from 'react';
+import React, { FC } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppStateType } from '../../../redux/reduxStore';
+import { actions } from './../../../redux/profileReducer';
 import style from './MyPosts.module.css';
 import Post from './Post/Post';
-import NewPostForm from './PostForm/PostForm';
-import { useDispatch } from 'react-redux';
+import NewPostForm, { NewPostType } from './PostForm/PostForm';
 
 function genId() { //кастомная генерация id
   let modelId = nanoid();
   return modelId;
 }
 
-const MyPosts = (props) => {
+const MyPosts: FC = () => {
+  const postsData = useSelector((state:AppStateType)=>state.profilePage.postsData)
   const dispatch = useDispatch();
-  let postsResult = props.postsData.map((post) => {
+  let postsResult = postsData.map((post) => {
     return (
       <Post key={genId()}
         id={post.id}
         message={post.message}
         name={post.name}
         age={post.age}
-        removePost={props.removePost}
       />)
   });
 
-  let addPost = (message) => {
-    dispatch(addPost(message.newPost))
-  }
+  let addPost = (message: NewPostType) => {
+    dispatch(actions.addPost(message.newPost));
+  };
 
   return (
     <div className={style.posts}>
@@ -41,5 +43,5 @@ const MyPosts = (props) => {
     </div>
   );
 }
-
-export default MyPosts;
+const MyPostsMemo = React.memo(MyPosts)
+export default MyPostsMemo;

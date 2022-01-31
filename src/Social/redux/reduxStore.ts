@@ -17,8 +17,7 @@ const rootReducer = combineReducers({
   form: formReducer,
   app: appReducer,
 });
-type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never;
-export type InferActionsTypes<T extends { [key: string]: (...args: any[]) => any }> = ReturnType<PropertiesTypes<T>>;
+export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never;
 export type BaseThunkType<A extends Action, R = void> = ThunkAction<R, AppStateType, unknown, A>;
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 type RootReducerType = typeof rootReducer;
