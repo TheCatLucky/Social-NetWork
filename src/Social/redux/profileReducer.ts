@@ -1,13 +1,7 @@
-import { ThunkAction } from "redux-thunk";
-import { profileAPI, usersAPI } from "../API/Api";
+import { ResultCodesEnum } from "../API/Api";
+import { profileAPI } from "../API/profileAPI";
 import { PhotosType, PostsType, ProfileType } from "../types/types";
-import { AppStateType } from "./reduxStore";
-const ADD_POST = "ADD-POST";
-const REMOVE_POST = "REMOVE-POST";
-const SET_USER_PROFILE = "SET_USER_PROFILE";
-const SET_STATUS = "SET_STATUS";
-const CHANGE_STATUS = "CHANGE_STATUS";
-const SET_PHOTO_SUCCESS = "SET_PHOTO_SUCCESS";
+import { BaseThunkType, InferActionsTypes } from "./reduxStore";
 
 type InitialStateType = typeof initialState;
 const initialState = {
@@ -21,16 +15,11 @@ const initialState = {
   profile: null as ProfileType | null,
   status: "",
 };
-type ActionsType =
-  | AddPostType
-  | RemovePostType
-  | SetStatusType
-  | ChangeStatusType
-  | SetUserProfileType
-  | SavePhotoSuccessType;
+type ActionsType = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsType>;
 const profileReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
   switch (action.type) {
-    case ADD_POST:
+    case "ADD_POST":
       if (action.postText === undefined) {
         return state;
       }
@@ -44,27 +33,27 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
         ...state,
         postsData: [...state.postsData, newPost],
       };
-    case REMOVE_POST:
+    case "REMOVE_POST":
       return {
         ...state,
         postsData: state.postsData.filter((p) => p.id !== action.id),
       };
-    case SET_USER_PROFILE:
+    case "SET_USER_PROFILE":
       return {
         ...state,
         profile: action.profile,
       };
-    case SET_STATUS:
+    case "SET_STATUS":
       return {
         ...state,
         status: action.status,
       };
-    case CHANGE_STATUS:
+    case "CHANGE_STATUS":
       return {
         ...state,
         status: action.status,
       };
-    case SET_PHOTO_SUCCESS:
+    case "SET_PHOTO_SUCCESS":
       return {
         ...state,
         profile: { ...state.profile, photos: action.photo } as ProfileType,
@@ -73,82 +62,69 @@ const profileReducer = (state: InitialStateType = initialState, action: ActionsT
       return state;
   }
 };
-export type AddPostType = {
-  type: typeof ADD_POST;
-  postText: string;
+export const actions = {
+  addPost: (postText: string) =>
+    ({
+      type: "ADD_POST",
+      postText: postText,
+    } as const),
+  removePost: (id: number) =>
+    ({
+      type: "REMOVE_POST",
+      id,
+    } as const),
+  savePhotoSuccess: (photo: PhotosType) =>
+    ({
+      type: "SET_PHOTO_SUCCESS",
+      photo,
+    } as const),
+  setStatus: (status: string) =>
+    ({
+      type: "SET_STATUS",
+      status: status,
+    } as const),
+  setUserProfile: (profile: ProfileType) =>
+    ({
+      type: "SET_USER_PROFILE",
+      profile,
+    } as const),
+  changeStatus: (status: string) =>
+    ({
+      type: "CHANGE_STATUS",
+      status,
+    } as const),
 };
-export type RemovePostType = {
-  type: typeof REMOVE_POST;
-  id: number;
-};
-export type SetStatusType = {
-  type: typeof SET_STATUS;
-  status: string;
-};
-export type ChangeStatusType = {
-  type: typeof CHANGE_STATUS;
-  status: string;
-};
-export type SetUserProfileType = {
-  type: typeof SET_USER_PROFILE;
-  profile: ProfileType;
-};
-export type SavePhotoSuccessType = {
-  type: typeof SET_PHOTO_SUCCESS;
-  photo: PhotosType;
-};
-export const addPost = (postText: string): AddPostType => ({
-  type: ADD_POST,
-  postText: postText,
-});
-export const removePost = (id: number): RemovePostType => ({
-  type: REMOVE_POST,
-  id,
-});
-export const savePhotoSuccess = (photo: PhotosType): SavePhotoSuccessType => ({
-  type: SET_PHOTO_SUCCESS,
-  photo,
-});
-
-const setStatus = (status: string): SetStatusType => ({
-  type: SET_STATUS,
-  status: status,
-});
-const setUserProfile = (profile: ProfileType): SetUserProfileType => ({
-  type: SET_USER_PROFILE,
-  profile,
-});
-
-export const changeStatus = (status: string): ChangeStatusType => ({
-  type: CHANGE_STATUS,
-  status,
-});
-type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsType>;
 export const getProfile =
   (userId: number): ThunkType =>
   (dispatch) => {
-    usersAPI.getProfile(userId).then((data: any) => {
-      dispatch(setUserProfile(data));
+    profileAPI.getProfile(userId).then((data) => {
+      dispatch(actions.setUserProfile(data));
     });
   };
-export const getStatus = (id: number):ThunkType => (dispatch) => {
-  profileAPI.getStatus(id).then((data: any) => {
-    dispatch(setStatus(data));
-  });
-};
-export const updateStatus = (status: string):ThunkType => (dispatch) => {
-  profileAPI.updateStatus(status).then((data: any) => {
-    if (data.resultCode === 0) {
-      dispatch(setStatus(status));
-    }
-  });
-};
-export const savePhoto = (file: any):ThunkType => (dispatch) => {
-  profileAPI.savePhoto(file).then((data: any) => {
-    if (data.resultCode === 0) {
-      dispatch(savePhotoSuccess(data.data.photos));
-    }
-  });
-};
+export const getStatus =
+  (id: number): ThunkType =>
+  (dispatch) => {
+    profileAPI.getStatus(id).then((data) => {
+      dispatch(actions.setStatus(data));
+    });
+  };
+export const updateStatus =
+  (status: string): ThunkType =>
+  (dispatch) => {
+    profileAPI.updateStatus(status).then((data) => {
+      if (data.resultCode === ResultCodesEnum.Success) {
+        dispatch(actions.setStatus(status));
+      }
+    });
+  };
+export const savePhoto =
+  (file: File): ThunkType =>
+  (dispatch) => {
+    profileAPI.savePhoto(file).then((data) => {
+      if (data.resultCode === ResultCodesEnum.Success) {
+        dispatch(actions.savePhotoSuccess(data.data.photos));
+      }
+    });
+  };
 
 export default profileReducer;

@@ -1,10 +1,12 @@
 import React from 'react';
 import style from './Post.module.css';
+import { useDispatch } from 'react-redux';
 
 const Post = (props) => {
+  const dispatch = useDispatch()
   const removePost = (id) => {
     console.log(id);
-    props.removePost(id) 
+    dispatch(removePost(id))
   }
   return (
     <div className={style.item}>

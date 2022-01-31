@@ -1,4 +1,4 @@
-import profileReducer, { addPost, removePost } from '../redux/profileReducer';
+import profileReducer, { actions } from '../redux/profileReducer';
 
 const state = {
   postsData: [
@@ -7,21 +7,22 @@ const state = {
     { id: 3, message: "Are you fine?", name: "Lina", age: 12 },
     { id: 4, message: "How old are you?", name: "Kostya", age: 53 },
     { id: 5, message: "Glad to see you", name: "Dasha", age: 36 },
-  ],
+  ]
 };
+
 it ("length of posts should be incremented", () => {
-  let action = addPost("test text");
+  let action = actions.addPost("test text");
   let newState = profileReducer(state, action);
   expect(newState.postsData.length).toBe(6);
 });
 
 it ("message of the last post should be correct", () => {
-  let action = addPost("test text");
+  let action = actions.addPost("test text");
   let newState = profileReducer(state, action);
   expect(newState.postsData[5].message).toBe("test text");
 });
 it ("length of posts should be decrement", () => {
-  let action = removePost(1);
+  let action = actions.removePost(1);
   let newState = profileReducer(state, action);
   expect(newState.postsData.length).toBe(4);
 });

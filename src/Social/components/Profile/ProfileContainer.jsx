@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { useMatch } from 'react-router-dom';
 import { compose } from 'redux';
 import { withAuthRedirect } from './../../Hoc/WithAuthRedirect';
-import { changeStatus, getProfile, getStatus, updateStatus, savePhoto } from './../../redux/profileReducer';
+import { actions, getProfile, getStatus, updateStatus, savePhoto } from './../../redux/profileReducer';
 import Profile from './Profile';
 
 class ProfileContainer extends React.Component {
 
   refreshProfile() {
     let userId = this.props.match?.params.userId;
+    console.log(userId);
     if (!userId) {
       userId = this.props.userId;
     }
@@ -22,11 +23,10 @@ class ProfileContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.userId !== prevProps.userId) {
+    if (this.props.userId != prevProps.userId) {
       this.refreshProfile();
     }
   }
-
 
   render() {
 
@@ -60,7 +60,13 @@ const ProfileMatch = (props) => {
 
 export default compose(
   connect(
-    mapStateToProps, { getProfile, getStatus, updateStatus, changeStatus, savePhoto }
+    mapStateToProps, {
+    getProfile,
+    getStatus,
+    updateStatus,
+    changeStatus: actions.changeStatus,
+    savePhoto
+  }
   ),
   withAuthRedirect
 )(ProfileMatch);

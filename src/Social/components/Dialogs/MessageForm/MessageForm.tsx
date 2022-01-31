@@ -1,9 +1,8 @@
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
-import { reset } from 'redux-form';
-import style from './../Dialogs.module.css';
-import { Textarea } from '../../Common/FormsControlls/FormsControls';
-import { required, maxLengthCreator} from '../../Utils/Validators/Validators';
 import { FC } from 'react';
+import { Field, InjectedFormProps, reduxForm, reset } from 'redux-form';
+import { Textarea } from '../../Common/FormsControlls/FormsControls';
+import { maxLengthCreator, required } from '../../Utils/Validators/Validators';
+import style from './../Dialogs.module.css';
 const maxLength = maxLengthCreator(50);
 type DialogsFormType = {
   dialogNewMessage: string;

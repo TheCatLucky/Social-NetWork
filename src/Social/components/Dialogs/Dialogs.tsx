@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 import MessageForm from './MessageForm/MessageForm';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppStateType } from '../../redux/reduxStore';
-import { sendMessage } from '../../redux/dialogsReducer';
+import { actions } from '../../redux/dialogsReducer';
 
 type DialogsFormType = {
   dialogNewMessage: string
@@ -21,7 +21,7 @@ const Dialogs = () => {
   })
 
   let onSendMessageClick = (messageData: DialogsFormType) => {
-    dispatch(sendMessage(messageData.dialogNewMessage));
+    dispatch(actions.sendMessage(messageData.dialogNewMessage));
   };
 
   return (

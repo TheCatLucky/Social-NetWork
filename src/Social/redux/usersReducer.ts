@@ -1,9 +1,9 @@
 import { Dispatch } from "redux";
-import { ThunkAction } from "redux-thunk";
-import { usersAPI } from "../API/Api";
+import { ResultCodesEnum } from "../API/Api";
+import { usersAPI } from "../API/usersAPI";
 import { updObjInArray } from "../components/Utils/Helper/ObjectHelper";
 import { UserType } from "../types/types";
-import { AppStateType, InferActionsTypes } from "./reduxStore";
+import { BaseThunkType, InferActionsTypes } from "./reduxStore";
 
 const initialState = {
   usersData: [] as Array<UserType>,
@@ -13,11 +13,11 @@ const initialState = {
   isFetching: true as boolean,
   followingProgress: [] as Array<number>,
 };
-
 type InitialState = typeof initialState;
+type ActionsType = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsType>;
 
-type ActionsTypes = InferActionsTypes<typeof actions>;
-const usersReducer = (state: InitialState = initialState, action: ActionsTypes): InitialState => {
+const usersReducer = (state: InitialState = initialState, action: ActionsType): InitialState => {
   switch (action.type) {
     case "FOLLOW":
       return {
@@ -104,27 +104,26 @@ export const actions = {
     } as const),
 };
 
-type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsTypes>;
 export const getUsers =
   (currentPage: number, pageSize: number): ThunkType =>
   (dispatch) => {
     dispatch(actions.toggleIsFetching(true));
     dispatch(actions.setCurrentPage(currentPage));
-    usersAPI.getUsers(currentPage, pageSize).then((data: any) => {
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
       dispatch(actions.setUsers(data.items));
       dispatch(actions.toggleIsFetching(false));
       dispatch(actions.setTotalUsersCount(data.totalCount));
     });
   };
 const _followUnfollowFlow = (
-  dispatch: Dispatch<ActionsTypes>,
+  dispatch: Dispatch<ActionsType>,
   userId: number,
   apiMethod: any,
-  actionCreator: (userId: number) => ActionsTypes
+  actionCreator: (userId: number) => ActionsType
 ) => {
   dispatch(actions.toggleFollowingProgress(true, userId));
   apiMethod(userId).then((data: any) => {
-    if (data.resultCode === 0) {
+    if (data.resultCode === ResultCodesEnum.Success) {
       dispatch(actionCreator(userId));
     }
     dispatch(actions.toggleFollowingProgress(false, userId));
