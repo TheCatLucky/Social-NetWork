@@ -13,34 +13,34 @@ const UsersContainer = React.lazy(() => import("./components/Users/UsersContaine
 const LoginContainer = React.lazy(() => import("./components/Login/LoginContainer"));
 
 const App: FC = () => {
-  const dispatch = useDispatch();
-  const initialized = useSelector((state: AppStateType) => state.app.initialized);
-  useEffect(() => {
-    dispatch(initializeApp());
-  }, []);
-  if (!initialized) {
-    return <Preloader />;
-  }
-  return (
-    <BrowserRouter>
-      <div className="app-wrapper">
-        <Header />
-        <Navbar />
-        <div className="app-wrapper-content">
-          <Suspense fallback={<Preloader />}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/profile" />} />
-              <Route path="/dialogs/*" element={<DialogsContainer  />} />
-              <Route path="/profile/:userId" element={<ProfileContainer  />} />
-              <Route path="/users" element={<UsersContainer />} />
-              <Route path="/login" element={<LoginContainer />} />
-              <Route path="*" element={<div>404 not found</div>} />
-            </Routes>
-          </Suspense>
-        </div>
-      </div>
-    </BrowserRouter>
-  );
+	const dispatch = useDispatch();
+	const initialized = useSelector((state: AppStateType) => state.app.initialized);
+	useEffect(() => {
+		dispatch(initializeApp());
+	}, []);
+	if (!initialized) {
+		return <Preloader />;
+	}
+	return (
+		<BrowserRouter>
+			<div className="app-wrapper">
+				<Header />
+				<Navbar />
+				<div className="app-wrapper-content">
+					<Suspense fallback={<Preloader />}>
+						<Routes>
+							<Route path="/" element={<Navigate to="/profile" />} />
+							<Route path="/dialogs/*" element={<DialogsContainer />} />
+							<Route path="/profile/:userId" element={<ProfileContainer />} />
+							<Route path="/users" element={<UsersContainer />} />
+							<Route path="/login" element={<LoginContainer />} />
+							<Route path="*" element={<div>404 not found</div>} />
+						</Routes>
+					</Suspense>
+				</div>
+			</div>
+		</BrowserRouter>
+	);
 };
 
 export default App;

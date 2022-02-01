@@ -6,23 +6,19 @@ import style from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 type PropsType = {
-  isOwner: boolean;
-  status: string;
-  profile: ProfileType;
-  store: AppStateType;
+	isOwner: boolean;
+	status: string;
+	profile: ProfileType;
+	store: AppStateType;
 };
 
 const Profile: FC<PropsType> = (props) => {
-  return (
-    <div className={style.profile}>
-      <ProfileInfo
-        isOwner={props.isOwner}
-        profile={props.profile}
-        status={props.status}
-      />
-      <MyPosts/>
-    </div>
-  );
+	return (
+		<div className={style.profile}>
+			<ProfileInfo isOwner={props.isOwner} profile={props.profile} status={props.status} />
+			<MyPosts />
+		</div>
+	);
 };
 
 export default Profile;

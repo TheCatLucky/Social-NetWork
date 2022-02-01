@@ -1,21 +1,21 @@
 * {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 .app-wrapper {
-  display: grid;
-  width: 100%;
-  grid-template-areas: 
-  "head head"
-  "nav cont";
+	display: grid;
+	width: 100%;
+	grid-template-areas:
+		"head head"
+		"nav cont";
 
-  grid-template-rows: 90px 1fr;
-  grid-template-columns: 2fr 10fr;
-  height: 100vh;
+	grid-template-rows: 90px 1fr;
+	grid-template-columns: 2fr 10fr;
+	height: 100vh;
 }
 
-.app-wrapper-content{
-  grid-area: cont;
-  background-color: wheat
+.app-wrapper-content {
+	grid-area: cont;
+	background-color: wheat;
 }

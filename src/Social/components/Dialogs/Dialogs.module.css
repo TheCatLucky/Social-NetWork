@@ -1,28 +1,28 @@
 .page {
-  display: grid;
-  grid-template-columns: 2fr 10fr;
+	display: grid;
+	grid-template-columns: 2fr 10fr;
 }
 .dialogs {
-  padding: 10px 0px 0px 10px;
+	padding: 10px 0px 0px 10px;
 }
 .item {
-  padding-top: 10px;
+	padding-top: 10px;
 }
 .item a {
-  text-decoration: none;
-  color: white;
+	text-decoration: none;
+	color: white;
 }
 a.active {
-  color: gold;
+	color: gold;
 }
 .messages {
-  padding: 10px 0px 0px 10px;
+	padding: 10px 0px 0px 10px;
 }
 .messageItem {
-  padding-top: 10px;
+	padding-top: 10px;
 }
 .messageArea {
-  margin-top: 10px;
-  width: 300px;
-  resize: none;
+	margin-top: 10px;
+	width: 300px;
+	resize: none;
 }

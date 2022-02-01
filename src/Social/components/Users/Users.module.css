@@ -1,46 +1,46 @@
 .img {
-  width: 100px;
+	width: 100px;
 }
 .ava {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .button {
-  margin-top: 5px;
-  width: 100px;
+	margin-top: 5px;
+	width: 100px;
 }
 .user {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-  justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 10px;
+	justify-content: space-between;
 }
 .userInfo {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 500px;
-  border: 2px solid red;
-  border-radius: 25px;
-  margin: 20px 50px 20px 0px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 500px;
+	border: 2px solid red;
+	border-radius: 25px;
+	margin: 20px 50px 20px 0px;
 }
 .name {
-  display: flex;
-  flex-direction: column;
-  margin-left: 20px;
+	display: flex;
+	flex-direction: column;
+	margin-left: 20px;
 }
 .userName {
-  margin-top: 10px;
+	margin-top: 10px;
 }
-.selected{
-  font-weight: bold;
+.selected {
+	font-weight: bold;
 }
-.pagesNumber{
-  display: flex;
-  flex-direction: row;
-  cursor: pointer;
+.pagesNumber {
+	display: flex;
+	flex-direction: row;
+	cursor: pointer;
 }
-.pageNumber{
-  margin-left: 10px;
+.pageNumber {
+	margin-left: 10px;
 }

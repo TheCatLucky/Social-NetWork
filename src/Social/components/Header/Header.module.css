@@ -1,18 +1,18 @@
 .header {
-  grid-area: head;
-  background: url(../../img/neon-grid.jpg);
-  background-position: -280px -410px;
+	grid-area: head;
+	background: url(../../img/neon-grid.jpg);
+	background-position: -280px -410px;
 }
-.login{
-  float: right;
-  margin-right: 10px;
-  color:white;
+.login {
+	float: right;
+	margin-right: 10px;
+	color: white;
 }
 .button {
-  margin-right: 10px;
-  color: white;
-  text-decoration: none;
+	margin-right: 10px;
+	color: white;
+	text-decoration: none;
 }
 .img {
-  width: 40px;
+	width: 40px;
 }
