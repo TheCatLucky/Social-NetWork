@@ -1,4 +1,4 @@
-import store from "./Social/redux/reduxStore";
+import store from "./Social/redux/ReduxStore";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./Social/App";

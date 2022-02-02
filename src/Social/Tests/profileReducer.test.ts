@@ -1,13 +1,15 @@
-import profileReducer, { actions } from "../redux/profileReducer";
+import profileReducer, { actions, InitialStateType } from "../redux/ProfileReducer";
 
-const state = {
+const state: InitialStateType = {
 	postsData: [
-		{ id: 1, message: "Hello", name: "Kira", age: "13" },
+		{ id: 1, message: "Hello", name: "Kira", age: 13 },
 		{ id: 2, message: "How are you?", name: "Line", age: 52 },
 		{ id: 3, message: "Are you fine?", name: "Lina", age: 12 },
 		{ id: 4, message: "How old are you?", name: "Kostya", age: 53 },
 		{ id: 5, message: "Glad to see you", name: "Dasha", age: 36 },
 	],
+	profile: null,
+	status: ""
 };
 
 it("length of posts should be incremented", () => {

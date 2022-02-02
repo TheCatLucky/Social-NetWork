@@ -1,8 +1,8 @@
 import { nanoid } from "nanoid";
 import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppStateType } from "../../../redux/reduxStore";
-import { actions } from "./../../../redux/profileReducer";
+import { AppStateType } from "../../../redux/ReduxStore";
+import { actions } from "../../../redux/ProfileReducer";
 import style from "./MyPosts.module.css";
 import Post from "./Post/Post";
 import NewPostForm, { NewPostType } from "./PostForm/PostForm";

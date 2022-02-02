@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateStatus } from "../../../redux/profileReducer";
+import { updateStatus } from "../../../redux/ProfileReducer";
 import style from "./ProfileStatus.module.css";
 
 type PropsType = {

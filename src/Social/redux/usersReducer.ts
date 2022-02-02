@@ -3,7 +3,7 @@ import { ResponseType, ResultCodesEnum } from "../API/Api";
 import { usersAPI } from "../API/usersAPI";
 import { updObjInArray } from "../components/Utils/Helper/ObjectHelper";
 import { UserType } from "../types/types";
-import { BaseThunkType, InferActionsTypes } from "./reduxStore";
+import { BaseThunkType, InferActionsTypes } from "./ReduxStore";
 
 const initialState = {
 	usersData: [] as Array<UserType>,
@@ -11,12 +11,16 @@ const initialState = {
 	totalUsersCount: 0 as number,
 	currentPage: 1 as number,
 	isFetching: true as boolean,
+	filter: {
+		term: "",
+		friend: null as null | boolean,
+	},
 	followingProgress: [] as Array<number>,
 };
-type InitialState = typeof initialState;
+export type InitialState = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>;
+export type FilterType = typeof initialState.filter;
 type ThunkType = BaseThunkType<ActionsType>;
-
 const usersReducer = (state: InitialState = initialState, action: ActionsType): InitialState => {
 	switch (action.type) {
 		case "FOLLOW":
@@ -65,6 +69,12 @@ const usersReducer = (state: InitialState = initialState, action: ActionsType): 
 					: state.followingProgress.filter((id) => id !== action.userId),
 			};
 		}
+    case "SET_FILTER": {
+			return {
+				...state,
+				filter: {...action.payload},
+			};
+		}
 		default:
 			return state;
 	}
@@ -90,6 +100,11 @@ export const actions = {
 			type: "SET_CURRENT_PAGE",
 			currentPage,
 		} as const),
+	setFilter: (filter: FilterType) =>
+		({
+			type: "SET_FILTER",
+			payload:  filter ,
+		} as const),
 	setTotalUsersCount: (totalUsersCount: number) =>
 		({
 			type: "SET_TOTAL_USERS_COUNT",
@@ -109,11 +124,12 @@ export const actions = {
 };
 
 export const getUsers =
-	(currentPage: number, pageSize: number): ThunkType =>
-	(dispatch) => {
+	(currentPage: number, pageSize: number, filter: FilterType): ThunkType =>
+    (dispatch) => {
 		dispatch(actions.toggleIsFetching(true));
 		dispatch(actions.setCurrentPage(currentPage));
-		usersAPI.getUsers(currentPage, pageSize).then((data) => {
+		dispatch(actions.setFilter(filter));
+		usersAPI.getUsers(currentPage, pageSize, filter).then((data) => {
 			dispatch(actions.setUsers(data.items));
 			dispatch(actions.toggleIsFetching(false));
 			dispatch(actions.setTotalUsersCount(data.totalCount));

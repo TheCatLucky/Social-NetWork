@@ -5,15 +5,16 @@ import "./App.css";
 import Preloader from "./components/Common/Preloader/Preloader";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import { initializeApp } from "./redux/appReducer";
-import { AppStateType } from "./redux/reduxStore";
+import { initializeApp } from "./redux/AppReducer";
+import { AppStateType } from "./redux/ReduxStore";
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
 const LoginContainer = React.lazy(() => import("./components/Login/LoginContainer"));
 
 const App: FC = () => {
-	const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const userId = useSelector((state: AppStateType) => state.auth.userId)
 	const initialized = useSelector((state: AppStateType) => state.app.initialized);
 	useEffect(() => {
 		dispatch(initializeApp());
@@ -29,7 +30,7 @@ const App: FC = () => {
 				<div className="app-wrapper-content">
 					<Suspense fallback={<Preloader />}>
 						<Routes>
-							<Route path="/" element={<Navigate to="/profile" />} />
+							<Route path="/" element={<Navigate to={`/profile/${userId}`} />} />
 							<Route path="/dialogs/*" element={<DialogsContainer />} />
 							<Route path="/profile/:userId" element={<ProfileContainer />} />
 							<Route path="/users" element={<UsersContainer />} />

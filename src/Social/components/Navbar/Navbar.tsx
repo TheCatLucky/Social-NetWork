@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./Navbar.module.css";
 import { useSelector } from "react-redux";
-import { AppStateType } from "../../redux/reduxStore";
+import { AppStateType } from "../../redux/ReduxStore";
 
 const Navbar: FC = () => {
 	const loggedInUserId = useSelector((state: AppStateType) => state.auth.userId);

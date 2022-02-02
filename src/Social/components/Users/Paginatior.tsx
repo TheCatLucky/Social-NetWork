@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { FC, useState } from "react";
 import { useDispatch } from "react-redux";
 import style from "./Users.module.css";
-import { actions } from "./../../redux/usersReducer";
+import { actions } from "../../redux/UsersReducer";
 
 type PropsType = {
 	totalUsersCount: number;

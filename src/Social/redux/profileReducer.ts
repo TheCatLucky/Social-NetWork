@@ -1,9 +1,11 @@
 import { ResultCodesEnum } from "../API/Api";
 import { profileAPI } from "../API/profileAPI";
 import { PhotosType, PostsType, ProfileType } from "../types/types";
-import { BaseThunkType, InferActionsTypes } from "./reduxStore";
+import { BaseThunkType, InferActionsTypes } from "./ReduxStore";
 
-type InitialStateType = typeof initialState;
+export type InitialStateType = typeof initialState;
+type ActionsType = InferActionsTypes<typeof actions>;
+type ThunkType = BaseThunkType<ActionsType>;
 const initialState = {
 	postsData: [
 		{ id: 0, message: "Hello", name: "Kira", age: "13" },
@@ -15,8 +17,7 @@ const initialState = {
 	profile: null as ProfileType | null,
 	status: "",
 };
-type ActionsType = InferActionsTypes<typeof actions>;
-type ThunkType = BaseThunkType<ActionsType>;
+
 const profileReducer = (
 	state: InitialStateType = initialState,
 	action: ActionsType

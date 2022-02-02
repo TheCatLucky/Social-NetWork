@@ -1,25 +1,22 @@
 import { Action, applyMiddleware, combineReducers, createStore } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
 import thunk, { ThunkAction } from "redux-thunk";
-import appReducer from "./appReducer";
-import authReducer from "./authReducer";
-import diallogsReducer from "./dialogsReducer";
-import profileReducer from "./profileReducer";
-import usersReducer from "./usersReducer";
-
-import { composeWithDevTools } from "redux-devtools-extension";
+import appReducer from "./AppReducer";
+import authReducer from "./AuthReducer";
+import diallogsReducer from "./DialogsReducer";
+import profileReducer from "./ProfileReducer";
+import UsersReducer from "./UsersReducer";
 
 const rootReducer = combineReducers({
 	profilePage: profileReducer,
 	dialogsPage: diallogsReducer,
-	usersPage: usersReducer,
+	usersPage: UsersReducer,
 	auth: authReducer,
 	form: formReducer,
 	app: appReducer,
 });
-export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U }
-	? U
-	: never;
+export type InferActionsTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U } ? U : never;
 export type BaseThunkType<A extends Action, R = void> = ThunkAction<R, AppStateType, unknown, A>;
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 type RootReducerType = typeof rootReducer;

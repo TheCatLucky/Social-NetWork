@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { actions } from "../../../../redux/profileReducer";
+import { actions } from "../../../../redux/ProfileReducer";
 import style from "./Post.module.css";
 type Props = {
 	id: number;

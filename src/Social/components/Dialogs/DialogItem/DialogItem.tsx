@@ -1,6 +1,6 @@
+import { FC } from "react";
 import { NavLink } from "react-router-dom";
 import style from "./../Dialogs.module.css";
-import { FC } from "react";
 type PropsType = {
 	id: number;
 	name: string;

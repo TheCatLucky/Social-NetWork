@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { AppStateType } from "../../redux/reduxStore";
+import { AppStateType } from "../../redux/ReduxStore";
 import { ProfileType } from "../../types/types";
 import MyPosts from "./MyPosts/MyPosts";
 import style from "./Profile.module.css";

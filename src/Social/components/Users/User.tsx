@@ -1,9 +1,9 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import userPhoto from "../../img/user_default.png";
-import { AppStateType } from "../../redux/reduxStore";
-import { follow, unfollow } from "../../redux/usersReducer";
+import { AppStateType } from "../../redux/ReduxStore";
+import { follow, unfollow } from "../../redux/UsersReducer";
 import { UserType } from "../../types/types";
 import style from "./Users.module.css";
 
@@ -11,7 +11,7 @@ type PropsType = {
 	user: UserType;
 };
 
-const User: FC<PropsType> = (props) => {
+const User: FC<PropsType> = React.memo((props) => {
 	const dispatch = useDispatch();
 	const handleFollow = (id: number) => {
 		dispatch(follow(id));
@@ -66,5 +66,5 @@ const User: FC<PropsType> = (props) => {
 			</div>
 		</div>
 	);
-};
+});
 export default User;

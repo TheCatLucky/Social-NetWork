@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../redux/dialogsReducer";
-import { AppStateType } from "../../redux/reduxStore";
+import { actions } from "../../redux/DialogsReducer";
+import { AppStateType } from "../../redux/ReduxStore";
 import DialogItem from "./DialogItem/DialogItem";
 import style from "./Dialogs.module.css";
 import Message from "./Message/Message";

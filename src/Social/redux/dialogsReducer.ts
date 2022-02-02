@@ -1,4 +1,4 @@
-import { InferActionsTypes } from "./reduxStore";
+import { InferActionsTypes } from "./ReduxStore";
 
 type InitialStateType = typeof initialState;
 export type DialogType = {

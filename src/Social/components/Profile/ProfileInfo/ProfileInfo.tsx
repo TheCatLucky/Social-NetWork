@@ -6,7 +6,7 @@ import ProfileStatus from "./ProfileStatus";
 import { FC } from "react";
 import { ProfileType } from "../../../types/types";
 import { useDispatch } from "react-redux";
-import { savePhoto } from "../../../redux/profileReducer";
+import { savePhoto } from "../../../redux/ProfileReducer";
 import { ChangeEvent } from "react";
 
 type Props = {
