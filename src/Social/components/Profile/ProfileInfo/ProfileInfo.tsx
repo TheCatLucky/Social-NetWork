@@ -6,7 +6,7 @@ import ProfileStatus from "./ProfileStatus";
 import { FC } from "react";
 import { ProfileType } from "../../../types/types";
 import { useDispatch } from "react-redux";
-import { savePhoto } from "../../../redux/ProfileReducer";
+import { savePhoto } from "../../../redux/Reducers/ProfileReducer";
 import { ChangeEvent } from "react";
 
 type Props = {
@@ -15,24 +15,26 @@ type Props = {
 	status: string;
 };
 
-const ProfileInfo: FC<Props> = (props) => {
+const ProfileInfo: FC<Props> = ({ profile, isOwner, status }) => {
 	const dispatch = useDispatch();
-	if (!props.profile) {
+	if (!profile) {
 		return <Preloader />;
 	}
-	let avatar = props.profile.photos.small;
+	let avatar = profile.photos.small;
 	const handlePhoto = (e: ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files && e.target.files.length) {
+			console.log(e.target.files[0]);
 			dispatch(savePhoto(e.target.files[0]));
 		}
 	};
+	console.log(isOwner);
 	return (
 		<div className={style.profile}>
 			<div>
-				<p>{props.profile.fullName}</p>
+				<p>{profile.fullName}</p>
 				<img className={style.avatar} src={avatar ? avatar : userPhoto} alt="avatar" />
-				{props.isOwner && <input type={"file"} onChange={handlePhoto} />}
-				<ProfileStatus status={props.status} />
+				{true && <input type={"file"} onChange={handlePhoto} />}
+				<ProfileStatus status={status} />
 			</div>
 		</div>
 	);

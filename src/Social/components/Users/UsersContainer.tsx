@@ -1,7 +1,7 @@
 import { FC, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppStateType } from "../../redux/ReduxStore";
-import { FilterType, getUsers } from "../../redux/UsersReducer";
+import { FilterType, getUsers } from "../../redux/Reducers/UsersReducer";
 import Preloader from "../Common/Preloader/Preloader";
 import Users from "./Users";
 

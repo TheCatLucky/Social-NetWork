@@ -12,10 +12,10 @@ type PropsType = {
 	store: AppStateType;
 };
 
-const Profile: FC<PropsType> = (props) => {
+const Profile: FC<PropsType> = ({ isOwner, profile, status }) => {
 	return (
 		<div className={style.profile}>
-			<ProfileInfo isOwner={props.isOwner} profile={props.profile} status={props.status} />
+			<ProfileInfo isOwner={isOwner} profile={profile} status={status} />
 			<MyPosts />
 		</div>
 	);

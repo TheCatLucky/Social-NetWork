@@ -1,18 +1,18 @@
 import React, { ChangeEvent, FC, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateStatus } from "../../../redux/ProfileReducer";
+import { updateStatus } from "../../../redux/Reducers/ProfileReducer";
 import style from "./ProfileStatus.module.css";
 
 type PropsType = {
 	status: string;
 };
-const ProfileStatusWithHooks: FC<PropsType> = (props) => {
+const ProfileStatusWithHooks: FC<PropsType> = ({ status ,}) => {
 	const [editMode, setEditMode] = useState(false);
-	const [status, setStatus] = useState<string>(props.status);
+	const [currentStatus, setCurrentStatus] = useState<string>(status);
 	const dispatch = useDispatch();
 	useEffect(() => {
-		setStatus(props.status);
-	}, [props.status]);
+		setCurrentStatus(status);
+	}, [status]);
 
 	const activateEditMode = () => {
 		setEditMode(true);
@@ -23,14 +23,14 @@ const ProfileStatusWithHooks: FC<PropsType> = (props) => {
 	};
 
 	const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setStatus(e.currentTarget.value);
+		setCurrentStatus(e.currentTarget.value);
 	};
 	return (
 		<>
 			{!editMode && (
 				<div>
 					<b>Статус : </b>
-					<span onDoubleClick={activateEditMode}>{props.status || "No status"}</span>
+					<span onDoubleClick={activateEditMode}>{status || "No status"}</span>
 				</div>
 			)}
 			{editMode && (
@@ -40,7 +40,7 @@ const ProfileStatusWithHooks: FC<PropsType> = (props) => {
 						className={style.input}
 						onBlur={deActivateEditMode}
 						onChange={onStatusChange}
-						value={status}
+						value={currentStatus}
 					></input>
 				</div>
 			)}

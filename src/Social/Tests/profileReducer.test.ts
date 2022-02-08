@@ -1,4 +1,4 @@
-import profileReducer, { actions, InitialStateType } from "../redux/ProfileReducer";
+import profileReducer, { actions, InitialStateType } from "../redux/Reducers/ProfileReducer";
 
 const state: InitialStateType = {
 	postsData: [

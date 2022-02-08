@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../Hoc/WithAuthRedirect";
-import { getProfile, getStatus } from "../../redux/ProfileReducer";
-import { AppStateType } from "../../redux/ReduxStore";
+import { getProfile, getStatus } from "../../redux/Reducers/ProfileReducer";
+import { getAuthState, getProfileState } from "../../redux/Selectors/Selectors";
 import Profile from "./Profile";
 
 const ProfileContainer = (props: any) => {
-	const profile = useSelector((state: AppStateType) => state.profilePage.profile);
-	const userId = useSelector((state: AppStateType) => state.auth.userId);
-	const status = useSelector((state: AppStateType) => state.profilePage.status);
+  const { userId } = useSelector(getAuthState);
+  const { profile, status } = useSelector(getProfileState);
 	const dispatch = useDispatch();
 	const refreshProfile = () => {
 		let curUserId = props?.match;
@@ -29,7 +28,6 @@ const ProfileContainer = (props: any) => {
 };
 
 const ProfileMatch = (props: any) => {
-	console.log(props);
 	let { userId } = useParams();
 	return <ProfileContainer {...props} match={userId} />;
 };

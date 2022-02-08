@@ -2,11 +2,11 @@ import { Action, applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import { reducer as formReducer } from "redux-form";
 import thunk, { ThunkAction } from "redux-thunk";
-import appReducer from "./AppReducer";
-import authReducer from "./AuthReducer";
-import diallogsReducer from "./DialogsReducer";
-import profileReducer from "./ProfileReducer";
-import UsersReducer from "./UsersReducer";
+import appReducer from "./Reducers/AppReducer";
+import authReducer from "./Reducers/AuthReducer";
+import diallogsReducer from "./Reducers/DialogsReducer";
+import profileReducer from "./Reducers/ProfileReducer";
+import UsersReducer from "./Reducers/UsersReducer";
 
 const rootReducer = combineReducers({
 	profilePage: profileReducer,

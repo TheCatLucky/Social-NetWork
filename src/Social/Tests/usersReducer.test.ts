@@ -1,5 +1,5 @@
-import { actions, InitialState } from "../redux/UsersReducer";
-import usersReducer from "../redux/UsersReducer";
+import { actions, InitialState } from "../redux/Reducers/UsersReducer";
+import usersReducer from "../redux/Reducers/UsersReducer";
 
 //@ts-ignore
 
@@ -101,6 +101,10 @@ beforeEach(() => {
 		currentPage: 1,
 		isFetching: true,
 		followingProgress: [],
+		filter: {
+			term: "",
+			friend: null,
+		},
 	};
 });
 test("follow test", () => {

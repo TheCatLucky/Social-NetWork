@@ -8,9 +8,9 @@ export type NewPostType = {
 	newPost: string;
 };
 const maxLength = maxLengthCreator(50);
-const NewPost: FC<InjectedFormProps<NewPostType>> = (props) => {
+const NewPost: FC<InjectedFormProps<NewPostType>> = ({ handleSubmit }) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={handleSubmit}>
 			<Field
 				name={"newPost"}
 				component={Textarea}

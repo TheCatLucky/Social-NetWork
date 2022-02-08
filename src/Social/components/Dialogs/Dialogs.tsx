@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { actions } from "../../redux/DialogsReducer";
-import { AppStateType } from "../../redux/ReduxStore";
+import { actions } from "../../redux/Reducers/DialogsReducer";
+import { getDialogsState } from "../../redux/Selectors/Selectors";
 import DialogItem from "./DialogItem/DialogItem";
 import style from "./Dialogs.module.css";
 import Message from "./Message/Message";
@@ -11,13 +11,13 @@ type DialogsFormType = {
 	dialogNewMessage: string;
 };
 const Dialogs: FC = () => {
-	const state = useSelector((state: AppStateType) => state.dialogsPage);
+	const { dialogsData, messagesData } = useSelector(getDialogsState);
 	const dispatch = useDispatch();
 
-	let dialogResult = state.dialogsData.map((id) => {
+	let dialogResult = dialogsData.map((id) => {
 		return <DialogItem key={id.id} id={id.id} name={id.name} />;
 	});
-	let messagesResult = state.messagesData.map((id) => {
+	let messagesResult = messagesData.map((id) => {
 		return <Message key={id.id} id={id.id} message={id.message} />;
 	});
 

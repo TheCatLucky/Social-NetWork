@@ -1,9 +1,9 @@
 import { Dispatch } from "redux";
-import { ResponseType, ResultCodesEnum } from "../API/Api";
-import { usersAPI } from "../API/usersAPI";
-import { updObjInArray } from "../components/Utils/Helper/ObjectHelper";
-import { UserType } from "../types/types";
-import { BaseThunkType, InferActionsTypes } from "./ReduxStore";
+import { ResponseType, ResultCodesEnum } from "../../API/Api";
+import { usersAPI } from "../../API/usersAPI";
+import { updObjInArray } from "../../components/Utils/Helper/ObjectHelper";
+import { UserType } from "../../types/types";
+import { BaseThunkType, InferActionsTypes } from "../ReduxStore";
 
 const initialState = {
 	usersData: [] as Array<UserType>,

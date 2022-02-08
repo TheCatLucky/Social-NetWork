@@ -5,12 +5,12 @@ type PropsType = {
 	id: number;
 	name: string;
 };
-const DialogItem: FC<PropsType> = (props) => {
-	let path = "/dialogs/" + props.id;
+const DialogItem: FC<PropsType> = ({ id, name }) => {
+	let path = "/dialogs/" + id;
 	return (
 		<div className={style.item}>
 			<NavLink to={path} className={({ isActive }) => (isActive ? `${style.active}` : "")}>
-				{props.name}
+				{name}
 			</NavLink>
 		</div>
 	);

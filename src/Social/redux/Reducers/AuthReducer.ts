@@ -1,8 +1,8 @@
 import { FormAction, stopSubmit } from "redux-form";
-import { ResultCodesEnum, ResultCodesEnumCaptcha } from "../API/Api";
-import { authAPI } from "../API/authAPI";
-import { securityAPI } from "../API/securityAPI";
-import { BaseThunkType, InferActionsTypes } from "./ReduxStore";
+import { ResultCodesEnum, ResultCodesEnumCaptcha } from "../../API/Api";
+import { authAPI } from "../../API/authAPI";
+import { securityAPI } from "../../API/securityAPI";
+import { BaseThunkType, InferActionsTypes } from "../ReduxStore";
 
 type InitialStateType = typeof initialState;
 

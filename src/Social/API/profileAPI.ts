@@ -5,15 +5,15 @@ type SavePhotoType = {
 };
 export const profileAPI = {
 	getProfile(id: number) {
-		return instance.get<ProfileType>(`profile/${id}`).then((response) => {
-			console.log(response.status, "Получение профиля");
-			return response.data;
+		return instance.get<ProfileType>(`profile/${id}`).then(({ status, data }) => {
+			console.log(status, "Получение профиля");
+			return data;
 		});
 	},
 	getStatus(id: number) {
-		return instance.get<string>(`/profile/status/${id}`).then((response) => {
-			console.log(response.status, "Получение статуса");
-			return response.data;
+		return instance.get<string>(`/profile/status/${id}`).then(({ status, data }) => {
+			console.log(status, "Получение статуса");
+			return data;
 		});
 	},
 	updateStatus(status: string) {
@@ -21,9 +21,9 @@ export const profileAPI = {
 			.put<ResponseType>(`/profile/status`, {
 				status,
 			})
-			.then((response) => {
-				console.log(response.status, "Обновление статуса");
-				return response.data;
+			.then(({ status, data }) => {
+				console.log(status, "Обновление статуса");
+				return data;
 			});
 	},
 	savePhoto(image: File) {
@@ -35,9 +35,9 @@ export const profileAPI = {
 					"Content-Type": "multipart*form-data",
 				},
 			})
-			.then((response) => {
-				console.log(response.status, "Фото отправлено");
-				return response.data;
+			.then(({status,data}) => {
+				console.log(status, "Фото отправлено");
+				return data;
 			});
 	},
 };

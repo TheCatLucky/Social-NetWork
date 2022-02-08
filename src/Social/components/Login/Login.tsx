@@ -2,8 +2,8 @@ import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { Field, InjectedFormProps, reduxForm } from "redux-form";
-import { logIn } from "../../redux/AuthReducer";
-import { AppStateType } from "../../redux/ReduxStore";
+import { logIn } from "../../redux/Reducers/AuthReducer";
+import { getAuthState } from "../../redux/Selectors/Selectors";
 import { Input } from "../Common/FormsControlls/FormsControls";
 import { required } from "../Utils/Validators/Validators";
 import style from "./Login.module.css";
@@ -17,8 +17,7 @@ type LoginFormOwnPropsType = {
 	captchaURL: string | null;
 };
 const Login: FC = () => {
-	const isAuth = useSelector((state: AppStateType) => state.auth.isAuth);
-	const captchaURL = useSelector((state: AppStateType) => state.auth.captchaURL);
+	const { isAuth, captchaURL } = useSelector(getAuthState);
 	const dispatch = useDispatch();
 	const onSubmit = (formData: LoginFormValuesType) => {
 		dispatch(logIn(formData.email, formData.password, formData.rememberMe, formData.captcha));
@@ -46,12 +45,14 @@ const Login: FC = () => {
 	);
 };
 
-const LoginForm: FC<
-	InjectedFormProps<LoginFormValuesType, LoginFormOwnPropsType> & LoginFormOwnPropsType
-> = (props) => {
+const LoginForm: FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnPropsType> & LoginFormOwnPropsType> = ({
+	handleSubmit,
+	error,
+	captchaURL,
+}) => {
 	return (
-		<form className={style.form} onSubmit={props.handleSubmit}>
-			{props.error && <p className={style.formSummaryError}>{props.error}</p>}
+		<form className={style.form} onSubmit={handleSubmit}>
+			{error && <p className={style.formSummaryError}>{error}</p>}
 			<div>
 				<Field
 					name={"email"}
@@ -72,24 +73,12 @@ const LoginForm: FC<
 				/>
 			</div>
 			<div className={style.remember}>
-				<Field
-					name={"rememberMe"}
-					component={Input}
-					type={"checkbox"}
-					className={style.remember}
-				/>
+				<Field name={"rememberMe"} component={Input} type={"checkbox"} className={style.remember} />
 				remember me
 			</div>
-			{props.captchaURL && (
-				<img className={style.captcha} src={props.captchaURL} alt="captcha" />
-			)}
-			{props.captchaURL && (
-				<Field
-					name={"captcha"}
-					component={Input}
-					type={"Input"}
-					className={style.formInput}
-				/>
+			{captchaURL && <img className={style.captcha} src={captchaURL} alt="captcha" />}
+			{captchaURL && (
+				<Field name={"captcha"} component={Input} type={"Input"} className={style.formInput} />
 			)}
 			<div>
 				<button>Login</button>

@@ -1,7 +1,7 @@
-import { ResultCodesEnum } from "../API/Api";
-import { profileAPI } from "../API/profileAPI";
-import { PhotosType, PostsType, ProfileType } from "../types/types";
-import { BaseThunkType, InferActionsTypes } from "./ReduxStore";
+import { ResultCodesEnum } from "../../API/Api";
+import { profileAPI } from "../../API/profileAPI";
+import { PhotosType, PostsType, ProfileType } from "../../types/types";
+import { BaseThunkType, InferActionsTypes } from "../ReduxStore";
 
 export type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof actions>;

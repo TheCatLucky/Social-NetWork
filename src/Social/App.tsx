@@ -5,12 +5,12 @@ import "./App.css";
 import Preloader from "./components/Common/Preloader/Preloader";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import { initializeApp } from "./redux/AppReducer";
+import { initializeApp } from "./redux/Reducers/AppReducer";
 import { AppStateType } from "./redux/ReduxStore";
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
 const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
-const LoginContainer = React.lazy(() => import("./components/Login/LoginContainer"));
+const Login = React.lazy(() => import("./components/Login/Login"));
 
 const App: FC = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const App: FC = () => {
 							<Route path="/dialogs/*" element={<DialogsContainer />} />
 							<Route path="/profile/:userId" element={<ProfileContainer />} />
 							<Route path="/users" element={<UsersContainer />} />
-							<Route path="/login" element={<LoginContainer />} />
+							<Route path="/login" element={<Login />} />
 							<Route path="*" element={<div>404 not found</div>} />
 						</Routes>
 					</Suspense>

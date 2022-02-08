@@ -8,9 +8,9 @@ const maxLength = maxLengthCreator(50);
 type DialogsFormType = {
 	dialogNewMessage: string;
 };
-const NewMessge: FC<InjectedFormProps<DialogsFormType>> = (props) => {
+const NewMessge: FC<InjectedFormProps<DialogsFormType>> = ({ handleSubmit }) => {
 	return (
-		<form onSubmit={props.handleSubmit}>
+		<form onSubmit={handleSubmit}>
 			<Field
 				name={"dialogNewMessage"}
 				component={Textarea}

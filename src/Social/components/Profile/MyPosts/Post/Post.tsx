@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { useDispatch } from "react-redux";
-import { actions } from "../../../../redux/ProfileReducer";
+import { actions } from "../../../../redux/Reducers/ProfileReducer";
 import style from "./Post.module.css";
 type Props = {
 	id: number;
@@ -8,7 +8,7 @@ type Props = {
 	name: string;
 	age: number;
 };
-const Post: FC<Props> = (props) => {
+const Post: FC<Props> = ({ message, name, id, age }) => {
 	const dispatch = useDispatch();
 	const removePost = (id: number) => {
 		console.log(id);
@@ -22,14 +22,14 @@ const Post: FC<Props> = (props) => {
 					src="https://www.film.ru/sites/default/files/filefield_paths/maxresdefault_1_24.jpg"
 					alt="avatar"
 				/>
-				<span className={style.messageText}>{props.message}</span>
+				<span className={style.messageText}>{message}</span>
 			</div>
 			<div className={style.itemInfo}>
 				<span className={style.name}>
-					Name: {props.name} Age: {props.age}
+					Name: {name} Age: {age}
 				</span>
 				<span className={style.buttonLike}>Like</span>
-				<button onClick={() => removePost(props.id)} className={style.buttonDelete}>
+				<button onClick={() => removePost(id)} className={style.buttonDelete}>
 					Удалить
 				</button>
 			</div>

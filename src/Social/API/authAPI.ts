@@ -9,9 +9,9 @@ export type LoginResponseDataType = {
 };
 export const authAPI = {
 	getMe() {
-		return instance.get<ResponseType<MeResponseDataType>>(`auth/me`).then((response) => {
-			console.log(response.status, "Авторизация");
-			return response.data;
+		return instance.get<ResponseType<MeResponseDataType>>(`auth/me`).then(({ status, data }) => {
+			console.log(status, "Авторизация");
+			return data;
 		});
 	},
 	logIn(email: string, password: string, rememberMe: boolean, captcha: string | null) {
@@ -22,15 +22,15 @@ export const authAPI = {
 				rememberMe,
 				captcha,
 			})
-			.then((response) => {
-				console.log(response.status, "Логинизация");
-				return response.data;
+			.then(({ status, data }) => {
+				console.log(status, "Логинизация");
+				return data;
 			});
 	},
 	logOut() {
-		return instance.delete<ResponseType>(`auth/login`).then((response) => {
-			console.log(response.status, "Разлогинен");
-			return response.data;
+		return instance.delete<ResponseType>(`auth/login`).then(({ status, data }) => {
+			console.log(status, "Разлогинен");
+			return data;
 		});
 	},
 };

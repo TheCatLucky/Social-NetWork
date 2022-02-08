@@ -4,8 +4,8 @@ type PropsType = {
 	id: number;
 	message: string;
 };
-const Message: FC<PropsType> = (props) => {
-	return <div className={style.messageItem}>{props.message}</div>;
+const Message: FC<PropsType> = ({ message }) => {
+	return <div className={style.messageItem}>{message}</div>;
 };
 
 export default Message;

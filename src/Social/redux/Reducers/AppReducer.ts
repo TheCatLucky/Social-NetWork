@@ -1,5 +1,5 @@
 import { checkAuth } from "./AuthReducer";
-import { BaseThunkType, InferActionsTypes } from "./ReduxStore";
+import { BaseThunkType, InferActionsTypes } from "../ReduxStore";
 
 type InitialStateType = typeof initialState;
 let initialState = {

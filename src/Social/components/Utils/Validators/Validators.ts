@@ -7,7 +7,7 @@ export const required: ValidateType = (value) => {
 
 export const maxLengthCreator =
 	(maxLength: number): ValidateType =>
-	(value) => {
-		if (value.length > maxLength) return `Max length is ${maxLength} symbols`;
+	({ length }) => {
+		if (length > maxLength) return `Max length is ${maxLength} symbols`;
 		return undefined;
 	};
