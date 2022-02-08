@@ -1,20 +1,25 @@
-import React, { FC } from "react";
-import { useSelector } from "react-redux";
-import { FilterType } from "../../redux/Reducers/UsersReducer";
+import React, { FC, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { FilterType, getUsers } from "../../redux/Reducers/UsersReducer";
 import { getUsersState } from "../../redux/Selectors/Selectors";
-import { UserType } from "../../types/types";
+import Preloader from "../Common/Preloader/Preloader";
 import Paginatior from "./Paginatior";
 import User from "./User";
+import style from "./Users.module.css";
 import { UsersSearchForm } from "./UsersSearchForm";
 
-type PropsType = {
-	users: Array<UserType>;
-	onFilterChanged: (filter:FilterType) => void
-};
-const Users: FC<PropsType> = React.memo(({ onFilterChanged, users }) => {
-  const { totalUsersCount, pageSize, currentPage } = useSelector(getUsersState);
+const Users: FC = React.memo(() => {
+	const { totalUsersCount, pageSize, currentPage, usersData, isFetching, filter } = useSelector(getUsersState);
+	const dispatch = useDispatch();
+	const onFilterChanged = (filter: FilterType) => {
+		dispatch(getUsers(1, pageSize, filter));
+	};
+	useEffect(() => {
+		dispatch(getUsers(currentPage, pageSize, filter));
+	}, [currentPage]);
 	return (
-		<>
+		<div className={style.content}>
+			{isFetching ? <Preloader /> : null}
 			<UsersSearchForm onFilterChanged={onFilterChanged} />
 			<Paginatior
 				totalUsersCount={totalUsersCount}
@@ -22,10 +27,10 @@ const Users: FC<PropsType> = React.memo(({ onFilterChanged, users }) => {
 				currentPage={currentPage}
 				portionSize={10}
 			/>
-			{users.map((u) => (
+			{usersData.map((u) => (
 				<User user={u} key={u.id} />
 			))}
-		</>
+		</div>
 	);
 });
 export default Users;

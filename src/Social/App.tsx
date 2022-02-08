@@ -6,16 +6,16 @@ import Preloader from "./components/Common/Preloader/Preloader";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import { initializeApp } from "./redux/Reducers/AppReducer";
-import { AppStateType } from "./redux/ReduxStore";
+import { getAppsState, getAuthState } from "./redux/Selectors/Selectors";
 const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"));
 const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"));
-const UsersContainer = React.lazy(() => import("./components/Users/UsersContainer"));
+const Users = React.lazy(() => import("./components/Users/Users"));
 const Login = React.lazy(() => import("./components/Login/Login"));
 
 const App: FC = () => {
   const dispatch = useDispatch();
-  const userId = useSelector((state: AppStateType) => state.auth.userId)
-	const initialized = useSelector((state: AppStateType) => state.app.initialized);
+  const {userId} = useSelector(getAuthState);
+	const {initialized} = useSelector(getAppsState);
 	useEffect(() => {
 		dispatch(initializeApp());
 	}, []);
@@ -32,8 +32,8 @@ const App: FC = () => {
 						<Routes>
 							<Route path="/" element={<Navigate to={`/profile/${userId}`} />} />
 							<Route path="/dialogs/*" element={<DialogsContainer />} />
-							<Route path="/profile/:userId" element={<ProfileContainer />} />
-							<Route path="/users" element={<UsersContainer />} />
+							<Route path="/profile/:id" element={<ProfileContainer />} />
+							<Route path="/users" element={<Users />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="*" element={<div>404 not found</div>} />
 						</Routes>

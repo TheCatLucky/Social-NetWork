@@ -7,7 +7,7 @@ import { getAuthState } from "../../redux/Selectors/Selectors";
 import { Input } from "../Common/FormsControlls/FormsControls";
 import { required } from "../Utils/Validators/Validators";
 import style from "./Login.module.css";
-type LoginFormValuesType = {
+export type LoginFormValuesType = {
 	email: string;
 	password: string;
 	rememberMe: boolean;
@@ -17,13 +17,13 @@ type LoginFormOwnPropsType = {
 	captchaURL: string | null;
 };
 const Login: FC = () => {
-	const { isAuth, captchaURL } = useSelector(getAuthState);
+	const { isAuth, captchaURL, userId } = useSelector(getAuthState);
 	const dispatch = useDispatch();
 	const onSubmit = (formData: LoginFormValuesType) => {
-		dispatch(logIn(formData.email, formData.password, formData.rememberMe, formData.captcha));
+		dispatch(logIn(formData));
 	};
 	if (isAuth) {
-		return <Navigate to={"/profile"} />;
+		return <Navigate to={`/profile/${userId}`} />;
 	}
 	return (
 		<div>

@@ -1,3 +1,4 @@
+import { LoginFormValuesType } from "../components/Login/Login";
 import { instance, ResponseType, ResultCodesEnumCaptcha } from "./Api";
 export type MeResponseDataType = {
 	id: number;
@@ -14,7 +15,7 @@ export const authAPI = {
 			return data;
 		});
 	},
-	logIn(email: string, password: string, rememberMe: boolean, captcha: string | null) {
+	logIn({ email, password, rememberMe, captcha }: LoginFormValuesType) {
 		return instance
 			.post<ResponseType<LoginResponseDataType, ResultCodesEnumCaptcha>>(`auth/login`, {
 				email,

@@ -2,6 +2,7 @@ import { FormAction, stopSubmit } from "redux-form";
 import { ResultCodesEnum, ResultCodesEnumCaptcha } from "../../API/Api";
 import { authAPI } from "../../API/authAPI";
 import { securityAPI } from "../../API/securityAPI";
+import { LoginFormValuesType } from "../../components/Login/Login";
 import { BaseThunkType, InferActionsTypes } from "../ReduxStore";
 
 type InitialStateType = typeof initialState;
@@ -70,32 +71,32 @@ export const checkAuth = (): ThunkType => (dispatch) => {
 };
 
 export const logIn =
-	(email: string, password: string, rememberMe: boolean, captcha: string): ThunkType =>
+	(formData: LoginFormValuesType): ThunkType =>
 	(dispatch) => {
-		authAPI.logIn(email, password, rememberMe, captcha).then((data) => {
-			if (data.resultCode === ResultCodesEnumCaptcha.Success) {
+		authAPI.logIn(formData).then(({ resultCode, messages }) => {
+			if (resultCode === ResultCodesEnumCaptcha.Success) {
 				dispatch(checkAuth());
 			} else {
-				if (data.resultCode === ResultCodesEnumCaptcha.CapthaIsRequired) {
+				if (resultCode === ResultCodesEnumCaptcha.CapthaIsRequired) {
 					dispatch(getCaptchaUrl());
 				} else {
-					let message = data.messages.length > 0 ? data.messages[0] : "Some Error";
+					let message = messages.length > 0 ? messages[0] : "Some Error";
 					dispatch(stopSubmit("login", { _error: message }));
 				}
 			}
 		});
 	};
 export const logOut = (): ThunkType => (dispatch) => {
-	authAPI.logOut().then((data) => {
-		if (data.resultCode === ResultCodesEnum.Success) {
+	authAPI.logOut().then(({ resultCode }) => {
+		if (resultCode === ResultCodesEnum.Success) {
 			dispatch(actions.setAuthUserData(null, null, null, false));
 		}
 	});
 };
 export const getCaptchaUrl = (): ThunkType => (dispatch) => {
-	securityAPI.getCaptureUrl().then((data) => {
-		console.log(data.url);
-		dispatch(actions.setCaptchaURL(data.url));
+	securityAPI.getCaptureUrl().then(({url}) => {
+		console.log(url);
+		dispatch(actions.setCaptchaURL(url));
 	});
 };
 

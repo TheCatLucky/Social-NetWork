@@ -7,29 +7,27 @@ import { getProfile, getStatus } from "../../redux/Reducers/ProfileReducer";
 import { getAuthState, getProfileState } from "../../redux/Selectors/Selectors";
 import Profile from "./Profile";
 
-const ProfileContainer = (props: any) => {
+const ProfileContainer = () => {
+  const { id } = useParams();
   const { userId } = useSelector(getAuthState);
   const { profile, status } = useSelector(getProfileState);
-	const dispatch = useDispatch();
-	const refreshProfile = () => {
-		let curUserId = props?.match;
-		if (!curUserId) {
-			curUserId = userId;
-		}
+  const dispatch = useDispatch();
+  let isOwner = false; // решить эту проблему
+  const refreshProfile = () => {
+    if (typeof (id) === "undefined") {
+      return;
+    }
+		const curUserId = userId ?? +id;
 		dispatch(getProfile(curUserId));
 		dispatch(getStatus(curUserId));
-	};
-
+  };
 	useEffect(() => {
 		refreshProfile();
-	}, [props.match]);
+	}, [id, userId]);
 
-	return <Profile {...props} isOwner={!props?.match} profile={profile} status={status} />;
+	return <Profile isOwner={isOwner} profile={profile} status={status} />;
 };
 
-const ProfileMatch = (props: any) => {
-	let { userId } = useParams();
-	return <ProfileContainer {...props} match={userId} />;
-};
 
-export default compose<React.ComponentType>(withAuthRedirect)(ProfileMatch);
+
+export default compose<React.ComponentType>(withAuthRedirect)(ProfileContainer);

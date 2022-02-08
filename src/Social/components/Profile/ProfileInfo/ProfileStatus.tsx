@@ -6,7 +6,7 @@ import style from "./ProfileStatus.module.css";
 type PropsType = {
 	status: string;
 };
-const ProfileStatusWithHooks: FC<PropsType> = ({ status ,}) => {
+const ProfileStatusWithHooks: FC<PropsType> = ({ status }) => {
 	const [editMode, setEditMode] = useState(false);
 	const [currentStatus, setCurrentStatus] = useState<string>(status);
 	const dispatch = useDispatch();

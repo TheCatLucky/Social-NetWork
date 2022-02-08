@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { AppStateType } from "../../redux/ReduxStore";
 import { ProfileType } from "../../types/types";
 import MyPosts from "./MyPosts/MyPosts";
 import style from "./Profile.module.css";
@@ -8,8 +7,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 type PropsType = {
 	isOwner: boolean;
 	status: string;
-	profile: ProfileType;
-	store: AppStateType;
+	profile: ProfileType|null;
 };
 
 const Profile: FC<PropsType> = ({ isOwner, profile, status }) => {

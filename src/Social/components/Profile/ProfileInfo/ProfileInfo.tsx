@@ -10,7 +10,7 @@ import { savePhoto } from "../../../redux/Reducers/ProfileReducer";
 import { ChangeEvent } from "react";
 
 type Props = {
-	profile: ProfileType;
+	profile: ProfileType|null;
 	isOwner: boolean;
 	status: string;
 };
@@ -33,7 +33,7 @@ const ProfileInfo: FC<Props> = ({ profile, isOwner, status }) => {
 			<div>
 				<p>{profile.fullName}</p>
 				<img className={style.avatar} src={avatar ? avatar : userPhoto} alt="avatar" />
-				{true && <input type={"file"} onChange={handlePhoto} />}
+				{isOwner && <input type={"file"} onChange={handlePhoto} />}
 				<ProfileStatus status={status} />
 			</div>
 		</div>
