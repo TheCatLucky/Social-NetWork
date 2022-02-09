@@ -1,0 +1,21 @@
+.login {
+	display: flex;
+	align-items: center;
+	float: right;
+	color: white;
+}
+.login button {
+	color: black;
+}
+.button {
+	margin-left: 5px;
+	display: flex;
+	align-items: center;
+	height: 30px;
+}
+.user {
+	margin-left: 5px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}

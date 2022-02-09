@@ -10,10 +10,10 @@
 }
 .item a {
 	text-decoration: none;
-	color: white;
+	color: black;
 }
 a.active {
-	color: gold;
+	color: orange;
 }
 .messages {
 	padding: 10px 0px 0px 10px;

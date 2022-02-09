@@ -1,49 +1,25 @@
-import React, { FC } from "react";
+import { Menu } from "antd";
+import { FC } from "react";
 import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getAuthState } from "../../redux/Selectors/Selectors";
-import style from "./Navbar.module.css";
 
 const Navbar: FC = () => {
 	const { userId } = useSelector(getAuthState);
 	return (
-		<nav className={style.nav}>
-			<ul>
-				<li className={style.item}>
-					<NavLink
-						to={`/profile/${userId}`}
-						className={({ isActive }) => (isActive ? `${style.active}` : "")}
-					>
-						Profile
-					</NavLink>
-				</li>
-				<li className={style.item}>
-					<NavLink to="/dialogs" className={({ isActive }) => (isActive ? `${style.active}` : "")}>
-						Messages
-					</NavLink>
-				</li>
-				<li className={style.item}>
-					<NavLink to="/users" className={({ isActive }) => (isActive ? `${style.active}` : "")}>
-						Users
-					</NavLink>
-				</li>
-				<li className={style.item}>
-					<NavLink to="/news" className={({ isActive }) => (isActive ? `${style.active}` : "")}>
-						News
-					</NavLink>
-				</li>
-				<li className={style.item}>
-					<NavLink to="/music" className={({ isActive }) => (isActive ? `${style.active}` : "")}>
-						Music
-					</NavLink>
-				</li>
-				<li className={style.item}>
-					<NavLink to="/settings" className={({ isActive }) => (isActive ? `${style.active}` : "")}>
-						Settings
-					</NavLink>
-				</li>
-			</ul>
-		</nav>
+		<>
+			<Menu mode="inline" defaultSelectedKeys={["1"]} defaultOpenKeys={["sub1"]} style={{ height: "100%" }}>
+				<Menu.Item key="1">
+					<Link to={`/profile/${userId}`}>Profile</Link>
+				</Menu.Item>
+				<Menu.Item key="2">
+					<Link to="/dialogs">Messages</Link>
+				</Menu.Item>
+				<Menu.Item key="3">
+					<Link to="/users">Users</Link>
+				</Menu.Item>
+			</Menu>
+		</>
 	);
 };
 
