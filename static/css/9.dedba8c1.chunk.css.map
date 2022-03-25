@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack://src/Social/Pages/Chat/ChatPage.module.css"],"names":[],"mappings":"AAAA,qBACC,UACD,CACA,0BACC,YAAa,CACZ,eACF","file":"9.dedba8c1.chunk.css","sourcesContent":[".img {\r\n\twidth: 40px;\r\n}\r\n.messages {\r\n\theight: 400px;\r\n  overflow-y: auto;\r\n}\r\n"]}
